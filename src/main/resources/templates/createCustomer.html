@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <form action="/web/customers/create/" method="post" autocomplete="off" style="width:600px">
+        <input type="text" class="form-control m-3" name="name" placeholder="Введіть ПІП">
+        <input type="text" class="form-control m-3" name="telephone" placeholder="Введіть номер телефону">
+        <input type="text" class="form-control m-3" name="placeOfResidence" placeholder="Введіть місто проживання">
+        <input type="text" class="form-control m-3" name="address" placeholder="Введіть адресу">
+        <input type="text" class="form-control m-3" name="passport" placeholder="Введіть номер паспорту">
+        <input type="text" class="form-control m-3" name="description" placeholder="Description">
+        <button type="submit" class="btn btn-success" style="width:100px; margin-left: 250px">Create</button>
+    </form>
+<br>
+<a href="/web/customers" class="btn btn-success m-2">Get all</a>
+</body>
+
+</html>

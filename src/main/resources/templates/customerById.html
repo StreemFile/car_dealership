@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>ПІП</th>
+        <th>Телефон</th>
+        <th>Місце проживання</th>
+        <th>Адреса</th>
+        <th>Номер паспорту</th>
+        <th>description</th>
+        <th>created_at</th>
+        <th>modified_at</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${customer.id}" />
+        <td th:text="${customer.name}" />
+        <td th:text="${customer.telephone}" />
+        <td th:text="${customer.placeOfResidence}" />
+        <td th:text="${customer.address}" />
+        <td th:text="${customer.passport}" />
+        <td th:text="${customer.description}" />
+        <td th:text="${customer.created_at}" />
+        <td th:text="${customer.modified_at}" />
+        <td>
+            <form th:action="'/web/customers/delete/' + ${customer.id}" method="post">
+                <button class="btn btn-warning mt-1" type="submit">Delete</button>
+            </form>
+        </td>
+        <td><a th:href="'/web/customers/edit/' + ${customer.id}" class="btn btn-warning mt-1">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+    <a href="/web/customers" class="btn btn-success m-2">Get all</a>
+</body>
+</html>
