@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GetById = () => {
+const InputGetByIdComponent = () => {
     return (
         <div>
             <form action="#" autoComplete="off">
@@ -15,4 +15,4 @@ const GetById = () => {
     );
 }
 
-export default GetById;
+export default InputGetByIdComponent;

@@ -5,7 +5,9 @@ import chnu.coursework.car_dealership.service.customer.impls.CustomerServiceImpl
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,6 +42,8 @@ public class CustomerRestController {
 
     @PostMapping("/create")
     public Customer create(@RequestBody Customer customer){
+        customer.setId(UUID.randomUUID().toString());
+        customer.setCreated_at(LocalDateTime.now());
         return service.create(customer);
     }
 

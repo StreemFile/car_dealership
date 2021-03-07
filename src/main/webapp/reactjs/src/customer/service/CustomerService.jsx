@@ -10,8 +10,12 @@ class CustomerService extends Component {
         this.state = {}
     }
 
-    getCustomers(){
+    getAll(){
         return axios.get(CUSTOMER_API_BASE_URL);
+    }
+
+    create(customer){
+        return axios.post(CUSTOMER_API_BASE_URL + "/create", customer);
     }
 
     render() {

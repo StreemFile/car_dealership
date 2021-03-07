@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CustomerList = (props) => {
+const CustomerListComponent = (props) => {
     return (
         <div>
             <table className = "table table-striped table-hover">
@@ -49,4 +49,4 @@ const CustomerList = (props) => {
     );
 }
 
-export default CustomerList;
+export default CustomerListComponent;
