@@ -1,5 +1,6 @@
 package chnu.coursework.car_dealership.service.customer.impls;
 
+import chnu.coursework.car_dealership.dao.customer.impls.CustomerDAOImpl;
 import chnu.coursework.car_dealership.data.FakeCustomer;
 import chnu.coursework.car_dealership.model.Customer;
 import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -21,8 +23,8 @@ import java.util.List;
 @Service
 public class CustomerServiceImpl implements ICustomerService {
 
-//    @Autowired
-//    CustomerDAOImpl dao;
+    @Autowired
+    CustomerDAOImpl dao;
 
     @Autowired
     CustomerRepository repository;
@@ -43,6 +45,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Customer update(Customer customer) {
+        customer.setModified_at(LocalDateTime.now());
         return repository.save(customer);
 //        return dao.update(customer);
     }
