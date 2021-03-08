@@ -15,8 +15,8 @@ const CustomerListComponent = (props) => {
                     <th>description</th>
                     <th>created_at</th>
                     <th>modified_at</th>
-                    <th>delete</th>
                     <th>edit</th>
+                    <th>delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,12 +34,15 @@ const CustomerListComponent = (props) => {
                                 <td>{customer.created_at}</td>
                                 <td>{customer.modified_at}</td>
                                 <td>
-                                    <form action="" method="post">
-                                        <button className="btn btn-warning mt-1" type="submit">Delete</button>
+                                    <form>
+                                        <button className="btn btn-warning mt-1" type="submit">Edit</button>
                                     </form>
                                 </td>
-                                <td><a href=""
-                                       className="btn btn-warning mt-1">Edit</a></td>
+                                <td>
+                                    <form action="" method="post">
+                                        <button className="btn btn-danger mt-1" type="submit">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                     )
                 }

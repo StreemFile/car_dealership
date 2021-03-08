@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CustomerService from "../../service/CustomerService";
+import CustomersGetAllButtonComponent from "../CustomersGetAllButtonComponent";
 
 
 class CustomerCreateComponent extends Component {
@@ -21,7 +22,6 @@ class CustomerCreateComponent extends Component {
         this.changePassportHandler = this.changePassportHandler.bind(this);
         this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
         this.createCustomer = this.createCustomer.bind(this);
-        this.getAllCustomers = this.getAllCustomers.bind(this);
     }
 
     changeNameHandler = (e) => {
@@ -67,10 +67,6 @@ class CustomerCreateComponent extends Component {
         })
     }
 
-    getAllCustomers = () => {
-        this.props.history.push("/customers");
-    }
-
     render() {
         return (
             <div>
@@ -96,7 +92,7 @@ class CustomerCreateComponent extends Component {
                     <button type="submit" className="btn btn-success" style={{width:"100px"}} onClick={this.createCustomer}>
                         Create
                     </button>
-                    <button className="btn btn-warning m-2" onClick={this.getAllCustomers}>Get all</button>
+                    <CustomersGetAllButtonComponent />
                 </form>
             </div>
         )

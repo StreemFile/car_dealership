@@ -18,6 +18,10 @@ class CustomerService extends Component {
         return axios.post(CUSTOMER_API_BASE_URL + "/create", customer);
     }
 
+    getById(id){
+        return axios.get(CUSTOMER_API_BASE_URL + "/get/" + id);
+    }
+
     render() {
         return (
             <div>
