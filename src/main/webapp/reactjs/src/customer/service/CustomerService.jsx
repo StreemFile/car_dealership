@@ -22,6 +22,14 @@ class CustomerService extends Component {
         return axios.get(CUSTOMER_API_BASE_URL + "/get/" + id);
     }
 
+    update(customer, customerId){
+        return axios.post(CUSTOMER_API_BASE_URL + "/edit/" + customerId, customer);
+    }
+
+    delete(id){
+        return axios.get(CUSTOMER_API_BASE_URL + "/delete/" + id);
+    }
+
     render() {
         return (
             <div>

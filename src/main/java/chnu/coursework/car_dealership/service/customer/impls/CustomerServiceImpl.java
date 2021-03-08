@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeCustomer.getAll());
+//        repository.saveAll(fakeCustomer.getCustomers());
     }
 
     @Override

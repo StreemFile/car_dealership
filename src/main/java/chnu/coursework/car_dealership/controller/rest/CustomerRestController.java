@@ -47,8 +47,9 @@ public class CustomerRestController {
         return service.create(customer);
     }
 
-    @PostMapping("/update")
-        public Customer update(@RequestBody Customer customer){
+    @PostMapping("/edit/{id}")
+        public Customer update(@PathVariable String id, @RequestBody Customer customer){
+            customer.setCreated_at(service.getById(id).getCreated_at());
             return service.update(customer);
         }
     }

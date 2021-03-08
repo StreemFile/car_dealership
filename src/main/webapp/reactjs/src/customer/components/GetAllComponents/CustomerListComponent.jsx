@@ -1,9 +1,13 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
+import CustomerService from "../../service/CustomerService";
+
+
 
 const CustomerListComponent = (props) => {
     return (
         <div>
-            <table className = "table table-striped table-hover">
+            <table className="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th>id</th>
@@ -34,14 +38,12 @@ const CustomerListComponent = (props) => {
                                 <td>{customer.created_at}</td>
                                 <td>{customer.modified_at}</td>
                                 <td>
-                                    <form>
-                                        <button className="btn btn-warning mt-1" type="submit">Edit</button>
-                                    </form>
+                                    <NavLink to={`customers/edit/${customer.id}`}>
+                                        <button className="btn btn-warning mt-1" type="submit" >Edit</button>
+                                    </NavLink>
                                 </td>
                                 <td>
-                                    <form action="" method="post">
-                                        <button className="btn btn-danger mt-1" type="submit">Delete</button>
-                                    </form>
+                                        <button className="btn btn-danger mt-1" >Delete</button>
                                 </td>
                             </tr>
                     )
