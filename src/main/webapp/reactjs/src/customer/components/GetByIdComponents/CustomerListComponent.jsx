@@ -1,25 +1,12 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import TableHeadComponent from "./TableHeadComponent";
 
 const CustomerListComponent = (props) => {
     return (
         <div>
             <table className = "table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>ПІП</th>
-                    <th>Телефон</th>
-                    <th>Місце проживання</th>
-                    <th>Адреса</th>
-                    <th>Номер паспорту</th>
-                    <th>description</th>
-                    <th>created_at</th>
-                    <th>modified_at</th>
-                    <th>edit</th>
-                    <th>delete</th>
-                </tr>
-                </thead>
+               <TableHeadComponent />
                 <tbody>
                 <tr key={props.customer.id}>
                     <td>{props.customer.id}</td>

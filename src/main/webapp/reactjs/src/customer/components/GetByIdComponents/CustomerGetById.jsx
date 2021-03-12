@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import CustomerListComponent from "./CustomerListComponent";
 import CustomerService from "../../service/CustomerService";
 import CustomersGetAllButtonComponent from "../CustomersGetAllButtonComponent";
 import {NavLink} from "react-router-dom";
+import TableHeadComponent from "./TableHeadComponent";
+import CustomerEditButtonComponent from "../CustomerEditButtonComponent";
 
 class CustomerGetById extends Component {
     constructor(props) {
@@ -19,8 +20,8 @@ class CustomerGetById extends Component {
         CustomerService.delete(id).then(res =>{
             this.props.history.push("/customers");
         });
-
     }
+
     componentDidMount(){
         CustomerService.getById(this.state.id).then(res => {
             this.setState({customer: res.data});
@@ -32,37 +33,19 @@ class CustomerGetById extends Component {
             <div>
                 <div>
                     <table className = "table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>ПІП</th>
-                            <th>Телефон</th>
-                            <th>Місце проживання</th>
-                            <th>Адреса</th>
-                            <th>Номер паспорту</th>
-                            <th>description</th>
-                            <th>created_at</th>
-                            <th>modified_at</th>
-                            <th>edit</th>
-                            <th>delete</th>
-                        </tr>
-                        </thead>
+                        <TableHeadComponent />
                         <tbody>
                         <tr key={this.state.customer.id}>
                             <td>{this.state.customer.id}</td>
                             <td>{this.state.customer.name}</td>
                             <td>{this.state.customer.telephone}</td>
-                            <td>{this.state.customer.address}</td>
                             <td>{this.state.customer.placeOfResidence}</td>
+                            <td>{this.state.customer.address}</td>
                             <td>{this.state.customer.passport}</td>
                             <td>{this.state.customer.description}</td>
                             <td>{this.state.customer.created_at}</td>
                             <td>{this.state.customer.modified_at}</td>
-                            <td>
-                                <NavLink to={`/customers/edit/${this.state.customer.id}`}>
-                                    <button className="btn btn-warning mt-1" type="submit" >Edit</button>
-                                </NavLink>
-                            </td>
+                            <td><CustomerEditButtonComponent id={this.state.customer.id} /></td>
                             <td>
                                 <button className="btn btn-danger mt-1" onClick={() => this.deleteCustomer(this.state.customer.id)}>Delete</button>
                             </td>
