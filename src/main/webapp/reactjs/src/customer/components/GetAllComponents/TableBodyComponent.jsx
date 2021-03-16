@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 import CustomerService from "../../service/CustomerService.jsx";
+import CustomerDeleteButtonComponent from "./CustomerDeleteButtonComponent.jsx";
 
 import CustomerEditButtonComponent from "../CustomerEditButtonComponent.jsx";
-import CustomerDeleteButtonComponent from "./CustomerDeleteButtonComponent.jsx";
 
 class TableBodyComponent extends Component {
     constructor(props) {
@@ -50,9 +50,7 @@ class TableBodyComponent extends Component {
                                 <CustomerEditButtonComponent id={customer.id}/>
                             </td>
                             <td>
-                                <button className="btn btn-danger mt-1" onClick={() => this.deleteCustomer(customer.id)}>Delete
-                                </button>
-                                {/*<CustomerDeleteButtonComponent customers = {this.state.customers} id = {customer.id} />*/}
+                                <CustomerDeleteButtonComponent deleteCustomer={this.deleteCustomer} id = {customer.id} />
                             </td>
                         </tr>
                 )

@@ -34,12 +34,23 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @PostConstruct
     void init(){
-//        fakeEmployee.getEmployees().get(0).setDealership(dealershipRepository.findAll().get(0));
-//        fakeEmployee.getEmployees().get(1).setDealership(dealershipRepository.findAll().get(1));
-//        fakeEmployee.getEmployees().get(2).setDealership(dealershipRepository.findAll().get(2));
-//        fakeEmployee.getEmployees().get(3).setDealership(dealershipRepository.findAll().get(3));
-//        fakeEmployee.getEmployees().get(4).setDealership(dealershipRepository.findAll().get(4));
-//        repository.saveAll(fakeEmployee.getEmployees());
+        fakeEmployee.getEmployees().get(0).setDealership(dealershipRepository.findAll().get(0));
+        fakeEmployee.getEmployees().get(1).setDealership(dealershipRepository.findAll().get(1));
+        fakeEmployee.getEmployees().get(2).setDealership(dealershipRepository.findAll().get(2));
+        fakeEmployee.getEmployees().get(3).setDealership(dealershipRepository.findAll().get(3));
+        fakeEmployee.getEmployees().get(4).setDealership(dealershipRepository.findAll().get(4));
+        fakeEmployee.getEmployees().get(5).setDealership(dealershipRepository.findAll().get(0));
+        fakeEmployee.getEmployees().get(6).setDealership(dealershipRepository.findAll().get(1));
+        fakeEmployee.getEmployees().get(7).setDealership(dealershipRepository.findAll().get(2));
+        fakeEmployee.getEmployees().get(8).setDealership(dealershipRepository.findAll().get(3));
+        fakeEmployee.getEmployees().get(9).setDealership(dealershipRepository.findAll().get(4));
+        fakeEmployee.getEmployees().get(10).setDealership(dealershipRepository.findAll().get(0));
+        fakeEmployee.getEmployees().get(11).setDealership(dealershipRepository.findAll().get(1));
+        fakeEmployee.getEmployees().get(12).setDealership(dealershipRepository.findAll().get(2));
+        fakeEmployee.getEmployees().get(13).setDealership(dealershipRepository.findAll().get(3));
+        fakeEmployee.getEmployees().get(14).setDealership(dealershipRepository.findAll().get(4));
+        fakeEmployee.getEmployees().get(15).setDealership(dealershipRepository.findAll().get(0));
+        repository.saveAll(fakeEmployee.getEmployees());
     }
 
     @Override
