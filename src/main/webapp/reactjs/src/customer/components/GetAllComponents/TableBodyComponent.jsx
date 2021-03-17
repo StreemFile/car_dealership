@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import CustomerService from "../../service/CustomerService.jsx";
-import CustomerDeleteButtonComponent from "./CustomerDeleteButtonComponent.jsx";
+import CustomerDeleteButtonComponent from "../CustomerDeleteButtonComponent.jsx";
 
 import CustomerEditButtonComponent from "../CustomerEditButtonComponent.jsx";
 

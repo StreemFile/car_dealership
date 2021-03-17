@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import CustomerGetAllComponent from './customer/components/GetAllComponents/CustomerGetAllComponent';
 import CustomerCreateComponent from "./customer/components/CreateComponents/CustomerCreateComponent";
