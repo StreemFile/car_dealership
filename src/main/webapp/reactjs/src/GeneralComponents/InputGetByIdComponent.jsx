@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-relative-link";
 
 class InputGetByIdComponent extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class InputGetByIdComponent extends Component {
                         <input type="search" name="id" className="form-control"
                                id="idInput" placeholder="Search by id"
                                onChange={this.handleChange} ref={this.getId} />
-                        <NavLink to={"/customers/get/" + this.state.id}>
+                        <NavLink to={"./get/" + this.state.id}>
                             <button className="btn btn-success">Search</button>
                         </NavLink>
                     </div>

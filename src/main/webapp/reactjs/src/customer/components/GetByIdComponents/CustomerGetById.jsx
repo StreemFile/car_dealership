@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import CustomerService from "../../service/CustomerService";
 import TableBodyComponent from "./TableBodyComponent";
 
-import CustomersGetAllButtonComponent from "../CustomersGetAllButtonComponent";
+import GetAllButtonAtUpdateAndGetByIdComponent from "../../../GeneralComponents/GetAllButtonAtUpdateAndGetByIdComponent"
 import TableHeadComponent from "./TableHeadComponent";
 
 
@@ -32,7 +32,7 @@ class CustomerGetById extends Component {
                         <TableBodyComponent history = {this.props.history} customer = {this.state.customer} />
                     </table>
                 </div>
-                <CustomersGetAllButtonComponent />
+                <GetAllButtonAtUpdateAndGetByIdComponent />
             </div>
 
         )

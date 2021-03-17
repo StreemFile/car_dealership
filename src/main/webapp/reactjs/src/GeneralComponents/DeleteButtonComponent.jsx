@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class CustomerDeleteButtonComponent extends Component {
+class DeleteButtonComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -12,7 +12,7 @@ class CustomerDeleteButtonComponent extends Component {
         return (
             <div>
                 <button className="btn btn-danger mt-1"
-                        onClick={() => this.props.deleteCustomer(this.props.id)}>
+                        onClick={() => this.props.delete(this.props.id)}>
                     Delete
                 </button>
             </div>
@@ -20,4 +20,4 @@ class CustomerDeleteButtonComponent extends Component {
     }
 }
 
-export default CustomerDeleteButtonComponent 
+export default DeleteButtonComponent

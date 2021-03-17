@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CustomerService from "../../service/CustomerService";
-import CustomersGetAllButtonComponent from "../CustomersGetAllButtonComponent";
+import GetAllButtonAtUpdateAndGetByIdComponent from "../../../GeneralComponents/GetAllButtonAtUpdateAndGetByIdComponent"
 
 class CustomerUpdateComponent extends Component {
     constructor(props) {
@@ -110,7 +110,7 @@ class CustomerUpdateComponent extends Component {
                     <button type="submit" className="btn btn-success" style={{width:"100px"}} onClick={this.updateCustomer}>
                         Edit
                     </button>
-                    <CustomersGetAllButtonComponent />
+                    <GetAllButtonAtUpdateAndGetByIdComponent />
                 </form>
             </div>
         )

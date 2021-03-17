@@ -1,14 +1,14 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-relative-link";
 
-const CustomerCreateButtonComponent = () => {
+const CreateButtonComponent = () => {
     return (
         <div>
-            <NavLink to="/customers/create">
+            <NavLink to="./create">
                 <button type="submit" className="btn btn-success m-2">Create</button>
             </NavLink>
         </div>
     );
 }
 
-export default CustomerCreateButtonComponent;
+export default CreateButtonComponent;

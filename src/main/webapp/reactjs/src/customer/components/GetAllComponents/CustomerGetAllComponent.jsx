@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-import InputGetByIdComponent from "./InputGetByIdComponent.jsx";
+import InputGetByIdComponent from "../../../GeneralComponents/InputGetByIdComponent.jsx";
 import TableBodyComponent from "./TableBodyComponent";
 
 import TableHeadComponent from "./TableHeadComponent.jsx";
-import CustomerCreateButtonComponent from "./CustomerCreateButtonComponent.jsx";
+import CreateButtonComponent from "../../../GeneralComponents/CreateButtonComponent.jsx";
 
 class CustomerGetAllComponent extends Component {
     render() {
@@ -14,7 +14,7 @@ class CustomerGetAllComponent extends Component {
                     <TableHeadComponent/>
                     <TableBodyComponent/>
                 </table>
-                <CustomerCreateButtonComponent/>
+                <CreateButtonComponent/>
                 <InputGetByIdComponent/>
             </div>
         )

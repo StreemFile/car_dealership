@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import CustomerDeleteButtonComponent from "../CustomerDeleteButtonComponent";
-import CustomerService from "../../service/CustomerService";
+import DeleteButtonComponent from "../../../GeneralComponents/DeleteButtonComponent.jsx";
+import CustomerService from "../../service/CustomerService.jsx";
 
-import CustomerEditButtonComponent from "../CustomerEditButtonComponent";
+import EditButtonAtGetByIdComponent from "../../../GeneralComponents/EditButtonAtGetByIdComponent.jsx";
 
 
 class TableBodyComponent extends Component {
@@ -34,12 +34,12 @@ class TableBodyComponent extends Component {
                 <td>{this.props.customer.created_at}</td>
                 <td>{this.props.customer.modified_at}</td>
                 <td>
-                    <CustomerEditButtonComponent
+                    <EditButtonAtGetByIdComponent
                         id={this.props.customer.id}/>
                 </td>
                 <td>
-                    <CustomerDeleteButtonComponent
-                        deleteCustomer={this.deleteCustomer}
+                    <DeleteButtonComponent
+                        delete={this.deleteCustomer}
                         id={this.props.customer.id}/>
                 </td>
             </tr>

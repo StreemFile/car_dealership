@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 import CustomerService from "../../service/CustomerService.jsx";
-import CustomerDeleteButtonComponent from "../CustomerDeleteButtonComponent.jsx";
+import DeleteButtonComponent from "../../../GeneralComponents/DeleteButtonComponent.jsx";
 
-import CustomerEditButtonComponent from "../CustomerEditButtonComponent.jsx";
+import EditButtonAtGetAllComponent from "../../../GeneralComponents/EditButtonAtGetAllComponent.jsx";
 
 class TableBodyComponent extends Component {
     constructor(props) {
@@ -47,10 +47,10 @@ class TableBodyComponent extends Component {
                             <td>{customer.created_at}</td>
                             <td>{customer.modified_at}</td>
                             <td>
-                                <CustomerEditButtonComponent id={customer.id}/>
+                                <EditButtonAtGetAllComponent id={customer.id}/>
                             </td>
                             <td>
-                                <CustomerDeleteButtonComponent deleteCustomer={this.deleteCustomer} id = {customer.id} />
+                                <DeleteButtonComponent delete={this.deleteCustomer} id = {customer.id} />
                             </td>
                         </tr>
                 )
