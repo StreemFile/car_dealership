@@ -29,7 +29,9 @@ class CustomerGetById extends Component {
                 <div>
                     <table className = "table table-striped table-hover">
                         <TableHeadComponent />
-                        <TableBodyComponent history = {this.props.history} customer = {this.state.customer} />
+                        <TableBodyComponent
+                            history = {this.props.history}
+                            customer = {this.state.customer} />
                     </table>
                 </div>
                 <GetAllButtonAtUpdateAndGetByIdComponent />
