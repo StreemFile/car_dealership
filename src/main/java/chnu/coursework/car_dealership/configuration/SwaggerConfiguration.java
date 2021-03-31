@@ -20,11 +20,11 @@ public class SwaggerConfiguration {
     public OpenAPI customerOpenAPI(){
         return new OpenAPI().info(
                 new Info()
-                .title("Курсова")
+                .title("Автосалон")
                 .version("1.0")
                 .contact(new Contact()
                         .email("volodymyr.moisei@gmail.com")
-                        .name("Volodymyr Moisei")
+                        .name("Moisei Volodymyr")
                 ));
     }
 }

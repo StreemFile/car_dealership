@@ -1,5 +1,6 @@
 package chnu.coursework.car_dealership.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,19 +20,28 @@ import java.time.LocalDateTime;
  * @Version Purchase: 1.0
  */
 
+@Schema(description = "Об'єкт продажі")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Document
 public class Purchase {
+    @Schema(description = "ID продажі", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
+    @Schema(description = "Проданий автомобіль")
     private Automobile automobile;
+    @Schema(description = "Покупець")
     private Customer customer;
+    @Schema(description = "Працівник, що продав")
     private Employee employee;
+    @Schema(description = "Дата продажі", example = "2021-28-03")
     private LocalDate purchaseDate;
+    @Schema(description = "Опис")
     private String description;
+    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;
+    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime modified_at;
 }

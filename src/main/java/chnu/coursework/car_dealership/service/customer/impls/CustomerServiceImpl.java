@@ -68,4 +68,17 @@ public class CustomerServiceImpl implements ICustomerService {
         return repository.findAll();
 //        return dao.getAll();
     }
+
+    public List<Customer> getByTwoPlacesOfResidence(String name, String name2) {
+        return  repository.findAllByPlaceOfResidenceEqualsOrPlaceOfResidenceEquals(name,name2);
+    }
+    public List<Customer> getByPlaceOfResidenceAndName(String place, String name) {
+        return  repository.findAllByPlaceOfResidenceEqualsAndNameContains(place,name);
+    }
+
+    public List<Customer> getAllExceptFrom(String placeOfResidence){
+        return repository.findDistinctByPlaceOfResidenceIsNot(placeOfResidence);
+    }
+
+//    public List<Customer>
 }
