@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -88,6 +89,11 @@ public class DealershipRestController {
                                   Dealership dealership) {
         dealership.setCreated_at(service.getById(id).getCreated_at());
         return service.update(dealership);
+    }
+
+    @GetMapping("/totalSalaries")
+    public Map<String,Integer> getEachDealershipTotalSalary(){
+        return service.getEachDealershipTotalSalary();
     }
 }
 

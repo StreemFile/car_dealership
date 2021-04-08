@@ -27,6 +27,7 @@ import java.util.UUID;
 @Builder
 @Document
 public class Customer {
+
     @Schema(description = "ID компанії", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;

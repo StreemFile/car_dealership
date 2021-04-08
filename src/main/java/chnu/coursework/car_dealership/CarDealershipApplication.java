@@ -2,6 +2,7 @@ package chnu.coursework.car_dealership;
 
 import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
 import chnu.coursework.car_dealership.service.automobile.impls.AutomobileServiceImpl;
+import chnu.coursework.car_dealership.service.dealership.impls.DealershipServiceImpl;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,11 @@ public class CarDealershipApplication implements CommandLineRunner {
     @Autowired
     private AutomobileServiceImpl automobileService;
 
+    @Autowired
+    private DealershipServiceImpl dealershipService;
+
     @Override
     public void run(String... args) throws Exception {
-
     }
 }
 

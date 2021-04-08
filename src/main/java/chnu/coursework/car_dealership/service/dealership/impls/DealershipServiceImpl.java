@@ -2,14 +2,19 @@ package chnu.coursework.car_dealership.service.dealership.impls;
 
 import chnu.coursework.car_dealership.data.FakeDealership;
 import chnu.coursework.car_dealership.model.Dealership;
+import chnu.coursework.car_dealership.model.Employee;
 import chnu.coursework.car_dealership.repository.company.CompanyRepository;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
 import chnu.coursework.car_dealership.service.dealership.interfaces.IDealershipService;
+import chnu.coursework.car_dealership.service.employee.impls.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,10 +34,13 @@ public class DealershipServiceImpl implements IDealershipService {
     CompanyRepository companyRepository;
 
     @Autowired
+    EmployeeServiceImpl employeeService;
+
+    @Autowired
     FakeDealership fakeDealership;
 
     @PostConstruct
-    void init(){
+    void init() {
 //        fakeDealership.getDealerships().get(0).setCompany(companyRepository.findAll().get(0));
 //        fakeDealership.getDealerships().get(1).setCompany(companyRepository.findAll().get(0));
 //        fakeDealership.getDealerships().get(2).setCompany(companyRepository.findAll().get(0));
@@ -70,5 +78,24 @@ public class DealershipServiceImpl implements IDealershipService {
     public List<Dealership> getAll() {
         return repository.findAll();
 //        return dao.getAll();
+    }
+
+    public Map<String, Integer> getEachDealershipTotalSalary() {
+        return employeeService.getAll()
+                       .stream()
+                       .collect(Collectors.groupingBy(
+                               item -> item.getDealership().getCity(),
+                               Collectors.summingInt(Employee::getSalary)
+                                                     ))
+                       .entrySet()
+                       .stream()
+                       .sorted(Map.Entry.comparingByValue())
+                       .collect(Collectors.toMap(
+                               item -> item.getKey(),
+                               item -> item.getValue(),
+                               (u, v) -> {
+                                   throw new IllegalStateException(String.format("Duplicate key %s", u));
+                               },
+                               LinkedHashMap::new));
     }
 }
