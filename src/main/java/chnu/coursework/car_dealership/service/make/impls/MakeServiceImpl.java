@@ -62,8 +62,4 @@ public class MakeServiceImpl implements IMakeService {
         return repository.findAll();
 //        return dao.getAll();
     }
-
-    public List<Make> getAllMakesExcept(String make){
-        return repository.findDistinctByNameIsNot(make);
-    }
 }

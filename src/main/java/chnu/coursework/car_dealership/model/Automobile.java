@@ -2,9 +2,9 @@ package chnu.coursework.car_dealership.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,44 +21,56 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
+@Entity
 public class Automobile {
     @Schema(description = "ID автомобіля", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "Тип кузова")
+    @ManyToOne
     private VehicleType vehicleType;
     @Schema(description = "Країна виробник")
+    @ManyToOne
     private ProducingCountry producingCountry;
     @Schema(description = "Марка")
+    @ManyToOne
     private Make make;
     @Schema(description = "Модель")
+    @ManyToOne
     private ModelAndPackage modelAndPackage;
     @Schema(description = "Привід")
     private String drive;
     @Schema(description = "Характеристики мотору")
+    @ManyToOne
     private Engine engine;
     @Schema(description = "Зовнішній колір")
+    @ManyToOne
     private ExteriorColor exteriorColor;
     @Schema(description = "Парковочні сенсори")
+    @ElementCollection
     @Singular private List<String> parkingSensors;
     @Schema(description = "Засоби безпеки")
+    @ElementCollection
     @Singular private List<String> securities;
     @Schema(description = "Тип фар")
     private String headlightsType;
     @Schema(description = "Тип коліс")
+    @ElementCollection
     @Singular private List<String> tyresAndWheels;
     @Schema(description = "Кількість дверей", example = "5")
     private int numberOfDoors;
     @Schema(description = "Внутрішній колір")
+    @ManyToOne
     private InteriorColor interiorColor;
     @Schema(description = "Матеріал салон")
     private String interiorMaterial;
     @Schema(description = "Засоби комфорту в салоні ")
+    @ElementCollection
     @Singular private List<String> interiorFeatures;
     @Schema(description = "Кількість місць", example = "5")
     private int numberOfSeats;
     @Schema(description = "Особливості автомобіля (люк, панорама і тд)", example = "5")
+    @ElementCollection
     @Singular private List<String> extras;
     @Schema(description = "VIN-код", example = "5")
     private String vin;
@@ -67,6 +79,7 @@ public class Automobile {
     @Schema(description = "Ціна", example = "5")
     private int price;
     @Schema(description = "Автосалон, в якому налічується даний автомобіль", example = "5")
+    @ManyToOne
     private Dealership dealership;
     @Schema(description = "Опис")
     private String description;

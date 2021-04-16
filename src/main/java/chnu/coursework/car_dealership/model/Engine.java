@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by IntelliJ IDEA.
  * car_dealership.Engine
@@ -20,7 +23,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class Engine {
+    @Id
+    private String id;
     @Schema(description = "Тип топлива", example = "Дизель")
     private String fuelType;
     @Schema(description = "Коробка передач", example = "Автомат")
@@ -33,4 +39,6 @@ public class Engine {
     private int powerPS;
     @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
     private String description;
+
+
 }

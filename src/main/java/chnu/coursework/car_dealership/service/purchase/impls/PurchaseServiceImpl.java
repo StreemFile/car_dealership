@@ -41,10 +41,10 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
     @PostConstruct
     void init(){
-//        fakePurchase.getPurchases().get(0).setAutomobile(automobileRepository.findAll().get(2));
-//        fakePurchase.getPurchases().get(0).setCustomer(customerRepository.findAll().get(0));
-//        fakePurchase.getPurchases().get(0).setEmployee(employeeRepository.findAll().get(1));
-//        repository.saveAll(fakePurchase.getPurchases());
+        fakePurchase.getPurchases().get(0).setAutomobile(automobileRepository.findAll().get(2));
+        fakePurchase.getPurchases().get(0).setCustomer(customerRepository.findAll().get(0));
+        fakePurchase.getPurchases().get(0).setEmployee(employeeRepository.findAll().get(1));
+        repository.saveAll(fakePurchase.getPurchases());
     }
 
     @Override

@@ -84,7 +84,4 @@ public class AutomobileRestController {
         automobile.setCreated_at(service.getById(id).getCreated_at());
         return service.update(automobile);
     }
-    public void m(){
-
-    }
 }

@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 /**
@@ -23,7 +25,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
+@Entity
 public class Employee {
     @Schema(description = "ID працівника", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
@@ -35,6 +37,7 @@ public class Employee {
     @Schema(description = "Номер телефону", example = "+380996035846")
     private String telephone;
     @Schema(description = "Автосалон, у якому працює")
+    @ManyToOne
     private Dealership dealership;
     @Schema(description = "Зарплата", example = "13000")
     private int salary;

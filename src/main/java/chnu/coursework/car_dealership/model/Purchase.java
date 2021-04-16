@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -25,16 +27,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
+@Entity
 public class Purchase {
     @Schema(description = "ID продажі", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "Проданий автомобіль")
+    @ManyToOne
     private Automobile automobile;
     @Schema(description = "Покупець")
+    @ManyToOne
     private Customer customer;
     @Schema(description = "Працівник, що продав")
+    @ManyToOne
     private Employee employee;
     @Schema(description = "Дата продажі", example = "2021-28-03")
     private LocalDate purchaseDate;
