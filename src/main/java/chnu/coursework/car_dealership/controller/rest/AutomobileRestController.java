@@ -84,16 +84,7 @@ public class AutomobileRestController {
         automobile.setCreated_at(service.getById(id).getCreated_at());
         return service.update(automobile);
     }
+    public void m(){
 
-//    @GetMapping("/get/make/volkswagen/seats/seven/minMaxAvg")
-//    public Object getVolkswagenWithSevenSeatsMinMaxAvgPrice(){
-//        return service.getVolkswagenWithSevenSeatsMinMaxAvgPrice();
-//    }
-//
-//    @GetMapping("/get/make/volkswagen/transmission/gearbox/cubicCapacity/min1600")
-//    public Object getVolkswagenGearboxMin1600CubicCapacity(){
-//        return service.getVolkswagenGearboxMin1600CubicCapacity();
-//    }
-
-
+    }
 }
