@@ -6,19 +6,23 @@ import CustomerGetAllComponent from './customer/components/GetAllComponents/Cust
 import CustomerCreateComponent from "./customer/components/CreateComponents/CustomerCreateComponent";
 import CustomerGetById from "./customer/components/GetByIdComponents/CustomerGetById";
 import CustomerUpdateComponent from "./customer/components/UpdateComponents/CustomerUpdateComponent";
+import NavbarComponent from "./GeneralComponents/NavbarComponent";
+import Company from "./company/components/company/Company";
 
 
 function App() {
     return (
         <BrowserRouter>
-            <div className="App">
+            <NavbarComponent/>
                 <Switch>
                     <Route path="/customers" exact component={CustomerGetAllComponent}/>
                     <Route path="/customers/create" exact component={CustomerCreateComponent} />
                     <Route path="/customers/get/:id" exact component={CustomerGetById} />
                     <Route path="/customers/edit/:id" exact component={CustomerUpdateComponent} />
+                    <Route path="/company" exact component={Company} />
+                    <Route path="/dealerships" exact component={Company} />
+                    <Route path="/dealership/:city" exact component={Company} />
                 </Switch>
-            </div>
         </BrowserRouter>
     );
 }

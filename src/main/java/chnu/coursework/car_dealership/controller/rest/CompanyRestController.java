@@ -25,7 +25,7 @@ import java.util.UUID;
         description = "Відповідає за керування даними колекції Company")
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/companies")
+@RequestMapping("/api/company")
 public class CompanyRestController {
 
     @Autowired

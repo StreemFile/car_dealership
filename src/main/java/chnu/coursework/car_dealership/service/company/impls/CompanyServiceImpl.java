@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -41,6 +42,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public Company update(Company company) {
+        company.setModified_at(LocalDateTime.now());
         return repository.save(company);
 //        return dao.update(company);
     }

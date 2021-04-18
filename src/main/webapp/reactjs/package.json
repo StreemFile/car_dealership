@@ -16,6 +16,7 @@
     "react-router-relative-link": "^4.0.2",
     "react-router-relative-links": "^0.1.0",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.2.3",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
