@@ -15,28 +15,26 @@ const NavbarComponent = () => {
 
     useEffect(() => {
         DealershipService.getAll().then(res => setDealerships(res.data))
-        console.log(dealerships);
     })
 
     return (
         <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-
             <Navbar.Brand to="/" as={NavLink}>YourCar</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link to="/company" as={NavLink}>Про нас</Nav.Link>
                     <NavDropdown title="Автосалон" id="collasible-nav-dropdown">
-                        {/*<NavDropdown.Item to="/dealership/chernivtsi" as={NavLink}>Чернівці</NavDropdown.Item>*/}
-                        {/*<NavDropdown.Item to="/dealership/mamaivtsi" as={NavLink}>Мамаївці</NavDropdown.Item>*/}
-                        {/*<NavDropdown.Item to="/dealership/kyiv" as={NavLink}>Київ</NavDropdown.Item>*/}
-                        {/*<NavDropdown.Item to="/dealership/odessa" as={NavLink}>Одеса</NavDropdown.Item>*/}
                         {
                             dealerships.map(dealership => {
-                                <NavDropdown.Item key={dealership.id} to={"/dealership/get/" + dealership.id}> as={NavLink}>{dealership.city}</NavDropdown.Item>
+                                return <NavDropdown.Item
+                                    key={dealership.id}
+                                    to={"/dealership/" + dealership.id}
+                                    as={NavLink}>
+                                         {dealership.city}
+                                </NavDropdown.Item>
                             })
                         }
-                        <NavDropdown.Item to="/dealership/lviv" as={NavLink}>Львів</NavDropdown.Item>
                         <NavDropdown.Item to="/dealerships" as={NavLink}>Всі</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link to="/automobiles" as={NavLink}>Автомобілі</Nav.Link>

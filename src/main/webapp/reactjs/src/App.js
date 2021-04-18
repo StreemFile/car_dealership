@@ -21,7 +21,7 @@ function App() {
                     <Route path="/customers/edit/:id" exact component={CustomerUpdateComponent} />
                     <Route path="/company" exact component={Company} />
                     <Route path="/dealerships" exact component={Company} />
-                    <Route path="/dealership/:city" exact component={Company} />
+                    <Route path="/dealership/:id" exact component={Company} />
                 </Switch>
         </BrowserRouter>
     );
