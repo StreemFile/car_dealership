@@ -10,7 +10,7 @@ const Logo = styled.img`
   width: auto;
 `
 
-const NavbarComponent = () => {
+const NavbarComponent = (props) => {
     const [dealerships, setDealerships] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const NavbarComponent = () => {
 
     return (
         <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand to="/" as={NavLink}>YourCar</Navbar.Brand>
+            <Navbar.Brand style={{marginLeft: "25px"}} to="/" as={NavLink}>YourCar</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
@@ -29,8 +29,11 @@ const NavbarComponent = () => {
                             dealerships.map(dealership => {
                                 return <NavDropdown.Item
                                     key={dealership.id}
-                                    to={"/dealership/" + dealership.id}
-                                    as={NavLink}>
+                                    to={"/dealership/" + dealership.cityEnglish}
+                                    as={NavLink}
+                                    onClick={() => {
+                                        props.getDealership(dealership.id)
+                                    }}>
                                          {dealership.city}
                                 </NavDropdown.Item>
                             })

@@ -30,6 +30,8 @@ public class Dealership {
     private String id;
     @Schema(description = "Місто розташування", example = "Київ")
     private String city;
+    @Schema(description = "Місто розташування англійською", example = "Kyiv")
+    private String cityEnglish;
     @Schema(description = "Адрес розташування", example = "Головна 12")
     private String address;
     @Schema(description = "Номер телефону", example = "+380503748394")

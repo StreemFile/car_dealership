@@ -24,19 +24,19 @@ public class FakeDealership {
 
     private List<Dealership> dealerships = new ArrayList<>(
             Arrays.asList(new Dealership(UUID.randomUUID().toString(),
-                   "Мамаївці", "провулок Заводський 11", "+380503741198",
+                   "Мамаївці", "mamaivtsi","провулок Заводський 11", "+380503741198",
                     null, "", LocalDateTime.now(), null ),
                      new Dealership(UUID.randomUUID().toString(),
-                    "Чернівці", "Руська 120", "+380503748184",
+                    "Чернівці","chernivtsi", "Руська 120", "+380503748184",
                     null, "", LocalDateTime.now(), null),
                     new Dealership(UUID.randomUUID().toString(),
-                    "Львів", "Березова 17", "+380505737937",
+                    "Львів","lviv", "Березова 17", "+380505737937",
                     null, "", LocalDateTime.now(), null),
                     new Dealership(UUID.randomUUID().toString(),
-                    "Одеса", "Авіаційна 24", "+380502123764",
+                    "Одеса","odessa", "Авіаційна 24", "+380502123764",
                     null, "", LocalDateTime.now(), null),
                     new Dealership(UUID.randomUUID().toString(),
-                    "Київ", "Макаренка 7", "+380992285544",
+                    "Київ", "kyiv","Макаренка 7", "+380992285544",
                     null, "", LocalDateTime.now(), null)
             )
     );
