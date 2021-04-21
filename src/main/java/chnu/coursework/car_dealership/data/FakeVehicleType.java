@@ -21,25 +21,43 @@ import java.util.UUID;
 public class FakeVehicleType {
     private List<VehicleType> vehicleTypes = new ArrayList<>(
             Arrays.asList(
-                    new VehicleType(UUID.randomUUID().toString(), "Універсал",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Седан",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Хетчбек",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Позашляховик/Кросовер",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Купе",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Кабріолет",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Мінівен",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Пікап",
-                            "", LocalDateTime.now(),null),
-                    new VehicleType(UUID.randomUUID().toString(), "Лімузин",
-                            "", LocalDateTime.now(),null)
-            )
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Універсал", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Седан", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Хетчбек", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Позашляховик/Кросовер", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Купе", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Кабріолет", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Мінівен", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Пікап", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new VehicleType(
+                            UUID.randomUUID().toString(),
+                            "Лімузин", "",
+                            LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<VehicleType> getVehicleTypes() {

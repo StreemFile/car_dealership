@@ -23,9 +23,11 @@ public class FakeCompany {
     private List<Company> company = new ArrayList<>(
             Arrays.asList(
                     new Company(UUID.randomUUID().toString(),
-                            "YourCar", "yourcar@gmail.com", "+380996088364", "Мамаївці",
-                            "провулок Заводський 11", "", LocalDateTime.now(),null)
-            )
+                                "YourCar", "yourcar@gmail.com",
+                                "+380996088364", "Мамаївці",
+                                "провулок Заводський 11", "",
+                                LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<Company> getCompany() {

@@ -8,34 +8,38 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * Created by IntelliJ IDEA.
- * car_dealership.ModelAndPackage
+ * automobile_dealership.AutomobileInOrder
  *
  * @Autor: vovamv
- * @DateTime: 11.02.2021|13:59
- * @Version ModelAndPackage: 1.0
+ * @DateTime: 21.04.2021|20:11
+ * @Version AutomobileInOrder: 1.0
  */
-@Schema(description = "Об'єкт моделі автомобіля")
+
+@Schema(description = "Об'єкт автомобіля, який замовлений")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Document
-public class ModelAndPackage {
-    @Schema(description = "ID моделі", accessMode = Schema.AccessMode.READ_ONLY)
+public class AutomobileInOrder {
+    @Schema(description = "ID замовлення", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
-    @Schema(description = "Модель", example = "Touran")
-    private String model;
-    @Schema(description = "Комплектація", example = "Highline")
-    private String pack;
+    @Schema(description = "Замовлений автомобіль")
+    private Automobile automobile;
+    @Schema(description = "Очікувана дата прибуття")
+    private LocalDate expectedArrivalDate;
     @Schema(description = "Опис")
     private String description;
     @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;
     @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime modified_at;
+
+
 }

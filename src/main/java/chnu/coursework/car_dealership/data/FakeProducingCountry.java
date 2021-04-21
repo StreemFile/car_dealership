@@ -21,15 +21,23 @@ import java.util.UUID;
 public class FakeProducingCountry {
     private List<ProducingCountry> producingCountries = new ArrayList<>(
             Arrays.asList(
-                    new ProducingCountry(UUID.randomUUID().toString(),
-                            "Німеччина","", LocalDateTime.now(),null),
-                    new ProducingCountry(UUID.randomUUID().toString(),
-                            "Сполучені Штати Америки","", LocalDateTime.now(),null),
-                    new ProducingCountry(UUID.randomUUID().toString(),
-                            "Чехія","", LocalDateTime.now(),null),
-                    new ProducingCountry(UUID.randomUUID().toString(),
-                            "Франція","", LocalDateTime.now(),null)
-            )
+                    new ProducingCountry(
+                            UUID.randomUUID().toString(),
+                            "Німеччина", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new ProducingCountry(
+                            UUID.randomUUID().toString(),
+                            "Сполучені Штати Америки", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new ProducingCountry(
+                            UUID.randomUUID().toString(),
+                            "Чехія", "",
+                            LocalDateTime.now(), LocalDateTime.now()),
+                    new ProducingCountry(
+                            UUID.randomUUID().toString(),
+                            "Франція", "",
+                            LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<ProducingCountry> getProducingCountries() {

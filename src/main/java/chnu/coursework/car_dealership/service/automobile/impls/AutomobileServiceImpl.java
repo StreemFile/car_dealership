@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,9 +74,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
 
     @PostConstruct
     void init() {
-//
+
 //        fakeAutomobile.getAutomobiles().get(0).setVehicleType(vehicleTypeRepository.findAll().get(6));
-//        fakeAutomobile.getAutomobiles().get(0).setProducingCountry(producingCountryRepository.findAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(0).setExportedFrom(producingCountryRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setMake(makeRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setExteriorColor(exteriorColorRepository.findAll().get(0));
@@ -83,7 +84,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(0).setDealership(dealershipRepository.findAll().get(1));
 //
 //        fakeAutomobile.getAutomobiles().get(1).setVehicleType(vehicleTypeRepository.findAll().get(6));
-//        fakeAutomobile.getAutomobiles().get(1).setProducingCountry(producingCountryRepository.findAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(1).setExportedFrom(producingCountryRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(1).setMake(makeRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(1).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(1).setExteriorColor(exteriorColorRepository.findAll().get(2));
@@ -91,7 +92,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(1).setDealership(dealershipRepository.findAll().get(1));
 //
 //        fakeAutomobile.getAutomobiles().get(2).setVehicleType(vehicleTypeRepository.findAll().get(6));
-//        fakeAutomobile.getAutomobiles().get(2).setProducingCountry(producingCountryRepository.findAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(2).setExportedFrom(producingCountryRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(2).setMake(makeRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(2).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(2).setExteriorColor(exteriorColorRepository.findAll().get(3));
@@ -99,7 +100,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(2).setDealership(dealershipRepository.findAll().get(1));
 //
 //        fakeAutomobile.getAutomobiles().get(3).setVehicleType(vehicleTypeRepository.findAll().get(2));
-//        fakeAutomobile.getAutomobiles().get(3).setProducingCountry(producingCountryRepository.findAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(3).setExportedFrom(producingCountryRepository.findAll().get(1));
 //        fakeAutomobile.getAutomobiles().get(3).setMake(makeRepository.findAll().get(2));
 //        fakeAutomobile.getAutomobiles().get(3).setModelAndPackage(modelAndPackageRepository.findAll().get(1));
 //        fakeAutomobile.getAutomobiles().get(3).setExteriorColor(exteriorColorRepository.findAll().get(4));
@@ -117,6 +118,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
 
     @Override
     public Automobile update(Automobile automobile) {
+        automobile.setModified_at(LocalDateTime.now());
         return repository.save(automobile);
 //        return dao.update(automobile);
     }

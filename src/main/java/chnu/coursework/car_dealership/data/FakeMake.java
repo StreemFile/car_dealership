@@ -22,16 +22,16 @@ public class FakeMake {
     private List<Make> makes = new ArrayList<>(
             Arrays.asList(
                     new Make(UUID.randomUUID().toString(), "Volkswagen",
-                            "", LocalDateTime.now(),null),
+                             "", LocalDateTime.now(), LocalDateTime.now()),
                     new Make(UUID.randomUUID().toString(), "Skoda",
-                            "", LocalDateTime.now(),null),
+                             "", LocalDateTime.now(), LocalDateTime.now()),
                     new Make(UUID.randomUUID().toString(), "Ford",
-                            "", LocalDateTime.now(),null),
+                             "", LocalDateTime.now(), LocalDateTime.now()),
                     new Make(UUID.randomUUID().toString(), "Peugeot",
-                            "", LocalDateTime.now(),null),
+                             "", LocalDateTime.now(), LocalDateTime.now()),
                     new Make(UUID.randomUUID().toString(), "Audi",
-                            "", LocalDateTime.now(),null)
-            )
+                             "", LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<Make> getMakes() {

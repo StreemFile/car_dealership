@@ -29,7 +29,7 @@ public class Automobile {
     @Schema(description = "Тип кузова")
     private VehicleType vehicleType;
     @Schema(description = "Країна виробник")
-    private ProducingCountry producingCountry;
+    private ProducingCountry exportedFrom;
     @Schema(description = "Марка")
     private Make make;
     @Schema(description = "Модель")
@@ -60,15 +60,23 @@ public class Automobile {
     private int numberOfSeats;
     @Schema(description = "Особливості автомобіля (люк, панорама і тд)", example = "5")
     @Singular private List<String> extras;
+    @Schema(description = "Пробіг", example = "237200")
+    private int mileage;
+    @Schema(description = "Рік випуску", example = "2015")
+    private int manufactureYear;
     @Schema(description = "VIN-код", example = "5")
     private String vin;
-    @Schema(description = "Наявність", example = "5")
+    @Schema(description = "Наявність", example = "sold")
     private String availability;
-    @Schema(description = "Ціна", example = "5")
-    private int price;
+    @Schema(description = "Закупна ціна", example = "15000")
+    private int actualPrice;
+    @Schema(description = "Очікувана ціна продажі", example = "20000")
+    private int expectedSellingPrice;
     @Schema(description = "Автосалон, в якому налічується даний автомобіль", example = "5")
     private Dealership dealership;
-    @Schema(description = "Опис")
+    @Schema(description = "Короткий опис")
+    private String title;
+    @Schema(description = "Детальний опис")
     private String description;
     @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;

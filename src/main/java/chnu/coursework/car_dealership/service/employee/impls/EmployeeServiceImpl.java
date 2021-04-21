@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,6 +80,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public Employee update(Employee employee) {
+        employee.setModified_at(LocalDateTime.now());
         return repository.save(employee);
 //        return dao.update(employee);
     }

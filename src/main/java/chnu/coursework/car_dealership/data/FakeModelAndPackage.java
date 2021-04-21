@@ -21,13 +21,16 @@ import java.util.UUID;
 public class FakeModelAndPackage {
     private List<ModelAndPackage> modelAndPackages = new ArrayList<>(
             Arrays.asList(
-                    new ModelAndPackage(UUID.randomUUID().toString(), "Touran",
-                            "VW",LocalDateTime.now(),null),
-                    new ModelAndPackage(UUID.randomUUID().toString(), "Mondeo",
-                            "Ford",LocalDateTime.now(),null),
-                    new ModelAndPackage(UUID.randomUUID().toString(), "Fabia",
-                            "Skoda",LocalDateTime.now(),null)
-            )
+                    new ModelAndPackage(UUID.randomUUID().toString(),
+                                        "Touran", "Highline", "VW",
+                                        LocalDateTime.now(), LocalDateTime.now()),
+                    new ModelAndPackage(UUID.randomUUID().toString(),
+                                        "Mondeo", "Sport", "Ford",
+                                        LocalDateTime.now(), LocalDateTime.now()),
+                    new ModelAndPackage(UUID.randomUUID().toString(),
+                                        "Fabia", "Active", "Skoda",
+                                        LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<ModelAndPackage> getModelAndPackages() {

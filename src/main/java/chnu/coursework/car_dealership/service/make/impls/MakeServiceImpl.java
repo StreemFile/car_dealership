@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class MakeServiceImpl implements IMakeService {
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeMake.getMakes());
+        repository.saveAll(fakeMake.getMakes());
     }
 
     @Override
@@ -40,6 +41,7 @@ public class MakeServiceImpl implements IMakeService {
 
     @Override
     public Make update(Make make) {
+        make.setModified_at(LocalDateTime.now());
         return repository.save(make);
 //        return dao.update(make);
     }

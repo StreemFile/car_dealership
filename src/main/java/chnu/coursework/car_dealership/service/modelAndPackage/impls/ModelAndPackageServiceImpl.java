@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class ModelAndPackageServiceImpl implements IModelAndPackageService {
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeModelAndPackage.getModelAndPackages());
+        repository.saveAll(fakeModelAndPackage.getModelAndPackages());
     }
 
     @Override
@@ -40,6 +41,7 @@ public class ModelAndPackageServiceImpl implements IModelAndPackageService {
 
     @Override
     public ModelAndPackage update(ModelAndPackage modelAndPackage) {
+        modelAndPackage.setModified_at(LocalDateTime.now());
         return repository.save(modelAndPackage);
 //        return dao.update(modelAndPackage);
     }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class VehicleTypeServiceImpl implements IVehicleTypeService {
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeVehicleType.getVehicleTypes());
+        repository.saveAll(fakeVehicleType.getVehicleTypes());
     }
 
     @Override
@@ -41,6 +42,7 @@ public class VehicleTypeServiceImpl implements IVehicleTypeService {
 
     @Override
     public VehicleType update(VehicleType vehicleType) {
+        vehicleType.setModified_at(LocalDateTime.now());
         return repository.save(vehicleType);
 //        return dao.update(vehicleType);
     }

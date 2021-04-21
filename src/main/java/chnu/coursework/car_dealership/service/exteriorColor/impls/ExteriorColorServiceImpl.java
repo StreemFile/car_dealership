@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class ExteriorColorServiceImpl implements IExteriorColorService {
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeExteriorColor.getExteriorColors());
+        repository.saveAll(fakeExteriorColor.getExteriorColors());
     }
 
     @Override
@@ -41,6 +42,7 @@ public class ExteriorColorServiceImpl implements IExteriorColorService {
 
     @Override
     public ExteriorColor update(ExteriorColor exteriorColor) {
+        exteriorColor.setModified_at(LocalDateTime.now());
         return repository.save(exteriorColor);
 //        return dao.update(exteriorColor);
     }

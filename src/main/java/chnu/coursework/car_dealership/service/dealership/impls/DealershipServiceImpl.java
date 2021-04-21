@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class DealershipServiceImpl implements IDealershipService {
 
     @Override
     public Dealership update(Dealership dealership) {
+        dealership.setModified_at(LocalDateTime.now());
         return repository.save(dealership);
 //        return dao.update(dealership);
     }

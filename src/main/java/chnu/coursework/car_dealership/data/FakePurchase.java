@@ -22,9 +22,12 @@ import java.util.UUID;
 public class FakePurchase {
     private List<Purchase> purchases = new ArrayList<>(
             Arrays.asList(
-                    new Purchase(UUID.randomUUID().toString(), null, null, null,
-                            LocalDate.now(), "", LocalDateTime.now(), null)
-            )
+                    new Purchase(
+                            UUID.randomUUID().toString(),
+                            null, null, null,
+                            19700, LocalDate.now(),
+                            "", LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<Purchase> getPurchases() {

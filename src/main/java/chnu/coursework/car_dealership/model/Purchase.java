@@ -36,6 +36,8 @@ public class Purchase {
     private Customer customer;
     @Schema(description = "Працівник, що продав")
     private Employee employee;
+    @Schema(description = "Ціна продажі")
+    private int soldPrice;
     @Schema(description = "Дата продажі", example = "2021-28-03")
     private LocalDate purchaseDate;
     @Schema(description = "Опис")

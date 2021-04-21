@@ -22,18 +22,18 @@ public class FakeInteriorColor {
     private List<InteriorColor> interiorColors = new ArrayList<>(
             Arrays.asList(
                     new InteriorColor(UUID.randomUUID().toString(), "Білий",
-                            "", LocalDateTime.now(), null),
+                                      "", LocalDateTime.now(), LocalDateTime.now()),
                     new InteriorColor(UUID.randomUUID().toString(), "Чорний",
-                            "", LocalDateTime.now(), null),
+                                      "", LocalDateTime.now(), LocalDateTime.now()),
                     new InteriorColor(UUID.randomUUID().toString(), "Червоний",
-                            "", LocalDateTime.now(), null),
+                                      "", LocalDateTime.now(), LocalDateTime.now()),
                     new InteriorColor(UUID.randomUUID().toString(), "Коричневий",
-                            "", LocalDateTime.now(), null),
+                                      "", LocalDateTime.now(), LocalDateTime.now()),
                     new InteriorColor(UUID.randomUUID().toString(), "Золотистий",
-                            "", LocalDateTime.now(), null),
+                                      "", LocalDateTime.now(), LocalDateTime.now()),
                     new InteriorColor(UUID.randomUUID().toString(), "Сірий",
-                            "", LocalDateTime.now(), null)
-            )
+                                      "", LocalDateTime.now(), LocalDateTime.now())
+                         )
     );
 
     public List<InteriorColor> getInteriorColors() {

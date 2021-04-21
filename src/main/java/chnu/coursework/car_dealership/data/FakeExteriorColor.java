@@ -22,23 +22,23 @@ public class FakeExteriorColor {
     private List<ExteriorColor> exteriorColors = new ArrayList<>(
             Arrays.asList(
                     new ExteriorColor(UUID.randomUUID().toString(), "Срібний",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Чорний",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Сірий",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Білий",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Синій",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Золотистий",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Червоний",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Зелений",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new ExteriorColor(UUID.randomUUID().toString(), "Салатовий",
-                            "", LocalDateTime.now(),null)
+                            "", LocalDateTime.now(),LocalDateTime.now())
             )
     );
 

@@ -26,23 +26,23 @@ public class FakeCustomer {
                     new Customer(UUID.randomUUID().toString(),
                             "Тащук Володимир Володимирович", "+380996088454",
                             "Мамаївці","провулок Заводський 15", "000680943",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new Customer(UUID.randomUUID().toString(),
                             "Іващук Валентин Ігорович", "+380503085364",
                             "Чернівці","Головна 12", "000643920",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new Customer(UUID.randomUUID().toString(),
                             "Григорчук Олег Іванович", "+380503054123",
                             "Чернівці","Руська 27", "002345924",
-                            "", LocalDateTime.now(),null),
+                            "", LocalDateTime.now(),LocalDateTime.now()),
                     new Customer(UUID.randomUUID().toString(),
                             "Яцик Іван Сергійович", "+380994037562",
                              "Івано-Франківськ", "Франка 12", "000480123",
-                             "", LocalDateTime.now(),null),
+                             "", LocalDateTime.now(),LocalDateTime.now()),
                     new Customer(UUID.randomUUID().toString(),
                             "Чегерин Аліна Василівна", "+380665847364",
                             "Чернівці", "Головна 42", "000665412",
-                            "", LocalDateTime.now(),null)
+                            "", LocalDateTime.now(),LocalDateTime.now())
             )
     );
 

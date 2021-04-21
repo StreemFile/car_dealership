@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -55,6 +56,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
     @Override
     public Purchase update(Purchase purchase) {
+        purchase.setModified_at(LocalDateTime.now());
         return repository.save(purchase);
 //        return dao.update(purchase);
     }
