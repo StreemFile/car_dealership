@@ -65,8 +65,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public List<Customer> getAll() {
-        return repository.findAll();
+//        return repository.findAll();
 //        return dao.getAll();
+        return fakeCustomer.getCustomers();
     }
 
     public List<Customer> getByTwoPlacesOfResidence(String name, String name2) {
