@@ -6,6 +6,7 @@ import chnu.coursework.car_dealership.model.engine.FuelType;
 import chnu.coursework.car_dealership.model.engine.TransmissionType;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,19 +28,23 @@ public class FakeEngine {
                     new Engine(UUID.randomUUID().toString(),
                                FuelType.DIESEL.toString(),
                                TransmissionType.MANUAL_GEARBOX.toString(),
-                               1968, 110, 150, ""),
+                               1968, 110, 150, "",
+                               LocalDateTime.now(), LocalDateTime.now()),
                     new Engine(UUID.randomUUID().toString(),
                                FuelType.DIESEL.toString(),
                                TransmissionType.AUTOMATIC.toString(),
-                               1968, 140, 190, ""),
+                               1968, 140, 190, "",
+                               LocalDateTime.now(), LocalDateTime.now()),
                     new Engine(UUID.randomUUID().toString(),
                                FuelType.DIESEL.toString(),
                                TransmissionType.MANUAL_GEARBOX.toString(),
-                               1598, 81, 110, ""),
+                               1598, 81, 110, "",
+                               LocalDateTime.now(), LocalDateTime.now()),
                     new Engine(UUID.randomUUID().toString(),
                                FuelType.DIESEL.toString(),
                                TransmissionType.MANUAL_GEARBOX.toString(),
-                               998, 92, 125, "")
+                               998, 92, 125, "",
+                               LocalDateTime.now(), LocalDateTime.now())
                          ));
 
     public List<Engine> getEngines() {
