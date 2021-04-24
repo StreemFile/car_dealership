@@ -28,7 +28,7 @@ import java.util.UUID;
 @Document
 public class Customer {
 
-    @Schema(description = "ID компанії", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "ID компанії")
     @Id
     private String id;
     @Schema(description = "ПІП покупця", example = "Тащук Василь Васильович")
@@ -43,9 +43,9 @@ public class Customer {
     private String passport;
     @Schema(description = "description")
     private String description;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата останньої модифікації об'єтку")
     private LocalDateTime modified_at;
 
     public Customer(String name, String telephone, String placeOfResidence, String address, String passport, String description) {

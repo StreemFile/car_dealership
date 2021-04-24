@@ -3,6 +3,7 @@ package chnu.coursework.car_dealership.service.modelAndPackage.impls;
 import chnu.coursework.car_dealership.data.FakeModelAndPackage;
 import chnu.coursework.car_dealership.model.ModelAndPackage;
 import chnu.coursework.car_dealership.repository.modelAndPackage.ModelAndPackageRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.modelAndPackage.interfaces.IModelAndPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,47 +22,41 @@ import java.util.List;
  */
 @Service
 public class ModelAndPackageServiceImpl implements IModelAndPackageService {
-
-    @Autowired
-    ModelAndPackageRepository repository;
-
     @Autowired
     FakeModelAndPackage fakeModelAndPackage;
 
+    @Autowired
+    GenericService genericService;
+
+    String className = "modelAndPackage";
+
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeModelAndPackage.getModelAndPackages());
+//        fakeModelAndPackage.getModelAndPackages().forEach(this::create);
     }
 
     @Override
     public ModelAndPackage create(ModelAndPackage modelAndPackage) {
-        return repository.save(modelAndPackage);
-//        return dao.create(modelAndPackage);
+        return genericService.create(modelAndPackage, modelAndPackage.getId(), className);
     }
 
     @Override
     public ModelAndPackage update(ModelAndPackage modelAndPackage) {
-        modelAndPackage.setModified_at(LocalDateTime.now());
-        return repository.save(modelAndPackage);
-//        return dao.update(modelAndPackage);
+        return genericService.update(modelAndPackage, modelAndPackage.getId(), className);
     }
 
     @Override
     public ModelAndPackage delete(ModelAndPackage modelAndPackage) {
-        repository.delete(modelAndPackage);
-        return modelAndPackage;
-//        return dao.delete(modelAndPackage);
+        return genericService.delete(modelAndPackage, modelAndPackage.getId(), className);
     }
 
     @Override
     public ModelAndPackage getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, ModelAndPackage.class);
     }
 
     @Override
     public List<ModelAndPackage> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, ModelAndPackage.class);
     }
 }

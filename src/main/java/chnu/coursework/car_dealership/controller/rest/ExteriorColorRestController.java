@@ -86,6 +86,7 @@ public class ExteriorColorRestController {
                              @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого кольору")
                                      ExteriorColor exteriorColor){
         exteriorColor.setCreated_at(service.getById(id).getCreated_at());
+        exteriorColor.setId(service.getById(id).getId());
         return service.update(exteriorColor);
     }
 }

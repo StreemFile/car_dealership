@@ -1,17 +1,23 @@
 package chnu.coursework.car_dealership.service.dealership.impls;
 
 import chnu.coursework.car_dealership.data.FakeDealership;
+import chnu.coursework.car_dealership.model.Company;
 import chnu.coursework.car_dealership.model.Dealership;
 import chnu.coursework.car_dealership.model.Employee;
 import chnu.coursework.car_dealership.repository.company.CompanyRepository;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
+import chnu.coursework.car_dealership.service.GenericService;
+import chnu.coursework.car_dealership.service.company.impls.CompanyServiceImpl;
 import chnu.coursework.car_dealership.service.dealership.interfaces.IDealershipService;
 import chnu.coursework.car_dealership.service.employee.impls.EmployeeServiceImpl;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,75 +35,48 @@ import java.util.stream.Collectors;
 public class DealershipServiceImpl implements IDealershipService {
 
     @Autowired
-    DealershipRepository repository;
-
-    @Autowired
-    CompanyRepository companyRepository;
-
-    @Autowired
-    EmployeeServiceImpl employeeService;
+    CompanyServiceImpl companyService;
 
     @Autowired
     FakeDealership fakeDealership;
 
+    @Autowired
+    GenericService genericService;
+    String className = "dealership";
+
     @PostConstruct
     void init() {
-//        fakeDealership.getDealerships().get(0).setCompany(companyRepository.findAll().get(0));
-//        fakeDealership.getDealerships().get(1).setCompany(companyRepository.findAll().get(0));
-//        fakeDealership.getDealerships().get(2).setCompany(companyRepository.findAll().get(0));
-//        fakeDealership.getDealerships().get(3).setCompany(companyRepository.findAll().get(0));
-//        fakeDealership.getDealerships().get(4).setCompany(companyRepository.findAll().get(0));
-//        repository.saveAll(fakeDealership.getDealerships());
+//        fakeDealership.getDealerships().get(0).setCompany(companyService.getAll().get(0));
+//        fakeDealership.getDealerships().get(1).setCompany(companyService.getAll().get(0));
+//        fakeDealership.getDealerships().get(2).setCompany(companyService.getAll().get(0));
+//        fakeDealership.getDealerships().get(3).setCompany(companyService.getAll().get(0));
+//        fakeDealership.getDealerships().get(4).setCompany(companyService.getAll().get(0));
+//
+//        fakeDealership.getDealerships().forEach(item -> create(item));
     }
 
     @Override
     public Dealership create(Dealership dealership) {
-        return repository.save(dealership);
-//        return dao.create(dealership);
+        return genericService.create(dealership, dealership.getId(), className);
     }
 
     @Override
     public Dealership update(Dealership dealership) {
-        dealership.setModified_at(LocalDateTime.now());
-        return repository.save(dealership);
-//        return dao.update(dealership);
+        return genericService.update(dealership, dealership.getId(), className);
     }
 
     @Override
     public Dealership delete(Dealership dealership) {
-        repository.delete(dealership);
-        return dealership;
-//        return dao.delete(dealership);
+        return genericService.delete(dealership, dealership.getId(), className);
     }
 
     @Override
     public Dealership getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, Dealership.class);
     }
 
     @Override
     public List<Dealership> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
-    }
-
-    public Map<String, Integer> getEachDealershipTotalSalary() {
-        return employeeService.getAll()
-                       .stream()
-                       .collect(Collectors.groupingBy(
-                               item -> item.getDealership().getCity(),
-                               Collectors.summingInt(Employee::getSalary)
-                                                     ))
-                       .entrySet()
-                       .stream()
-                       .sorted(Map.Entry.comparingByValue())
-                       .collect(Collectors.toMap(
-                               item -> item.getKey(),
-                               item -> item.getValue(),
-                               (u, v) -> {
-                                   throw new IllegalStateException(String.format("Duplicate key %s", u));
-                               },
-                               LinkedHashMap::new));
+        return genericService.getAll(className, Dealership.class);
     }
 }

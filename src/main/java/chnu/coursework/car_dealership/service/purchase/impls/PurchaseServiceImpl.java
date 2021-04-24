@@ -6,6 +6,10 @@ import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository
 import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
 import chnu.coursework.car_dealership.repository.employee.EmployeeRepository;
 import chnu.coursework.car_dealership.repository.purchase.PurchaseRepository;
+import chnu.coursework.car_dealership.service.GenericService;
+import chnu.coursework.car_dealership.service.automobile.impls.AutomobileServiceImpl;
+import chnu.coursework.car_dealership.service.customer.impls.CustomerServiceImpl;
+import chnu.coursework.car_dealership.service.employee.impls.EmployeeServiceImpl;
 import chnu.coursework.car_dealership.service.purchase.interfaces.IPurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,57 +30,52 @@ import java.util.List;
 public class PurchaseServiceImpl implements IPurchaseService {
 
     @Autowired
-    PurchaseRepository repository;
-
-    @Autowired
-    AutomobileRepository automobileRepository;
-
-    @Autowired
     FakePurchase fakePurchase;
 
     @Autowired
-    CustomerRepository customerRepository;
+    AutomobileServiceImpl automobileService;
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    CustomerServiceImpl customerService;
+
+    @Autowired
+    EmployeeServiceImpl employeeService;
+
+    @Autowired
+    GenericService genericService;
+
+    String className = "purchase";
 
     @PostConstruct
     void init(){
-//        fakePurchase.getPurchases().get(0).setAutomobile(automobileRepository.findAll().get(2));
-//        fakePurchase.getPurchases().get(0).setCustomer(customerRepository.findAll().get(0));
-//        fakePurchase.getPurchases().get(0).setEmployee(employeeRepository.findAll().get(1));
-//        repository.saveAll(fakePurchase.getPurchases());
+//        fakePurchase.getPurchases().get(0).setAutomobile(automobileService.getAll().get(2));
+//        fakePurchase.getPurchases().get(0).setCustomer(customerService.getAll().get(0));
+//        fakePurchase.getPurchases().get(0).setEmployee(employeeService.getAll().get(1));
+//        fakePurchase.getPurchases().forEach(this::create);
     }
 
     @Override
     public Purchase create(Purchase purchase) {
-        return repository.save(purchase);
-//        return dao.create(purchase);
+       return genericService.create(purchase, purchase.getId(), className);
     }
 
     @Override
     public Purchase update(Purchase purchase) {
-        purchase.setModified_at(LocalDateTime.now());
-        return repository.save(purchase);
-//        return dao.update(purchase);
+        return genericService.update(purchase, purchase.getId(), className);
     }
 
     @Override
     public Purchase delete(Purchase purchase) {
-        repository.delete(purchase);
-        return purchase;
-//        return dao.delete(purchase);
+        return genericService.delete(purchase, purchase.getId(), className);
     }
 
     @Override
     public Purchase getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, Purchase.class);
     }
 
     @Override
     public List<Purchase> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, Purchase.class);
     }
 }

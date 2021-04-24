@@ -3,6 +3,7 @@ package chnu.coursework.car_dealership.service.make.impls;
 import chnu.coursework.car_dealership.data.FakeMake;
 import chnu.coursework.car_dealership.model.Make;
 import chnu.coursework.car_dealership.repository.make.MakeRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.make.interfaces.IMakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,49 +24,40 @@ import java.util.List;
 public class MakeServiceImpl implements IMakeService {
 
     @Autowired
-    MakeRepository repository;
+    FakeMake fakeMake;
 
     @Autowired
-    FakeMake fakeMake;
+    GenericService genericService;
+
+    String className = "make";
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeMake.getMakes());
+//        fakeMake.getMakes().forEach(this::create);
     }
 
     @Override
     public Make create(Make make) {
-        return repository.save(make);
-//        return dao.create(make);
+        return genericService.create(make, make.getId(), className);
     }
 
     @Override
     public Make update(Make make) {
-        make.setModified_at(LocalDateTime.now());
-        return repository.save(make);
-//        return dao.update(make);
+        return genericService.update(make, make.getId(), className);
     }
 
     @Override
     public Make delete(Make make) {
-        repository.delete(make);
-        return make;
-//        return dao.delete(make);
+        return genericService.delete(make, make.getId(), className);
     }
 
     @Override
     public Make getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, Make.class);
     }
 
     @Override
     public List<Make> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
-    }
-
-    public List<Make> getAllMakesExcept(String make){
-        return repository.findDistinctByNameIsNot(make);
+        return genericService.getAll(className, Make.class);
     }
 }

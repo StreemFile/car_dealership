@@ -82,6 +82,7 @@ public class AutomobileInOrderRestController {
                              @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого автомобіля")
                                      AutomobileInOrder automobileInOrder){
         automobileInOrder.setCreated_at(service.getById(id).getCreated_at());
+        automobileInOrder.setId(service.getById(id).getId());
         return service.update(automobileInOrder);
     }
 }

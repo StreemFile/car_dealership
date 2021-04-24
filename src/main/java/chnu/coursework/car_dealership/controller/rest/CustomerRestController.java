@@ -87,22 +87,9 @@ public class CustomerRestController {
                            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого покупця")
                                    Customer customer) {
         customer.setCreated_at(service.getById(id).getCreated_at());
+        customer.setId(service.getById(id).getId());
         return service.update(customer);
     }
-//
-//    @GetMapping("/get/byPlaceOfResidence/{name1}/or/{name2}")
-//    public List<Customer> getByTwoPlacesOfResidence(@PathVariable String name1, @PathVariable String name2) {
-//        return service.getByTwoPlacesOfResidence(name1,name2);
-//    }
-//    @GetMapping("/get/byPlaceOfResidence/{place}/name/{name}")
-//    public List<Customer> getByPlaceOfResidenceAndName(@PathVariable String place, @PathVariable String name) {
-//        return service.getByPlaceOfResidenceAndName(place,name);
-//    }
-//    @GetMapping("/get/byPlaceOfResidence/except/{place}")
-//    public List<Customer> getAllExceptFrom(@PathVariable String place) {
-//        return service.getAllExceptFrom(place);
-//    }
-
 }
 
 

@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class Company {
-    @Schema(description = "ID компанії", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "ID компанії")
     @Id
     private String id;
     @Schema(description = "Назва компанії", example = "SomeName")
@@ -40,8 +40,8 @@ public class Company {
     private String addressOfTheMainOffice;
     @Schema(description = "description")
     private String description;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата останньої модифікації об'єтку")
     private LocalDateTime modified_at;
 }

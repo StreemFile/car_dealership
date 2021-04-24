@@ -26,15 +26,15 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class VehicleType {
-    @Schema(description = "ID кузова", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "ID кузова")
     @Id
     private String id;
     @Schema(description = "Тип кузова", example = "Седан")
     private String vehicleType;
     @Schema(description = "Опис")
     private String description;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата останньої модифікації об'єтку")
     private LocalDateTime modified_at;
 }

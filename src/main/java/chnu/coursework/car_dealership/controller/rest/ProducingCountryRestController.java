@@ -86,6 +86,7 @@ public class ProducingCountryRestController {
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої країни")
                                         ProducingCountry producingCountry){
         producingCountry.setCreated_at(service.getById(id).getCreated_at());
+        producingCountry.setId(service.getById(id).getId());
         return service.update(producingCountry);
     }
 }

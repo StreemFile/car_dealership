@@ -25,15 +25,15 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class Make {
-    @Schema(description = "ID марки", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "ID марки")
     @Id
     private String id;
     @Schema(description = "Марка", example = "Volkswagen")
     private String name;
     @Schema(description = "description")
     private String description;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата останньої модифікації об'єтку")
     private LocalDateTime modified_at;
 }

@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class ModelAndPackage {
-    @Schema(description = "ID моделі", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "ID моделі")
     @Id
     private String id;
     @Schema(description = "Модель", example = "Touran")
@@ -34,8 +34,8 @@ public class ModelAndPackage {
     private String pack;
     @Schema(description = "Опис")
     private String description;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата останньої модифікації об'єтку")
     private LocalDateTime modified_at;
 }

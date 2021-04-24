@@ -83,6 +83,7 @@ public class CompanyRestController {
                           @RequestBody
                                   Company company) {
         company.setCreated_at(service.getById(id).getCreated_at());
+        company.setId(service.getById(id).getId());
         return service.update(company);
     }
 }

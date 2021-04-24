@@ -3,6 +3,7 @@ package chnu.coursework.car_dealership.service.producingCountry.impls;
 import chnu.coursework.car_dealership.data.FakeProducingCountry;
 import chnu.coursework.car_dealership.model.ProducingCountry;
 import chnu.coursework.car_dealership.repository.producingCountry.ProducingCountryRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.producingCountry.interfaces.IProducingCountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,45 +24,40 @@ import java.util.List;
 public class ProducingCountryServiceImpl implements IProducingCountryService {
 
     @Autowired
-    ProducingCountryRepository repository;
+    FakeProducingCountry fakeProducingCountry;
 
     @Autowired
-    FakeProducingCountry fakeProducingCountry;
+    GenericService genericService;
+
+    String className = "producingCountry";
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeProducingCountry.getProducingCountries());
+//        fakeProducingCountry.getProducingCountries().forEach(this::create);
     }
 
     @Override
     public ProducingCountry create(ProducingCountry producingCountry) {
-        return repository.save(producingCountry);
-//        return dao.create(producingCountry);
+        return genericService.create(producingCountry, producingCountry.getId(), className);
     }
 
     @Override
     public ProducingCountry update(ProducingCountry producingCountry) {
-        producingCountry.setModified_at(LocalDateTime.now());
-        return repository.save(producingCountry);
-//        return dao.update(producingCountry);
+        return genericService.update(producingCountry, producingCountry.getId(), className);
     }
 
     @Override
     public ProducingCountry delete(ProducingCountry producingCountry) {
-        repository.delete(producingCountry);
-        return producingCountry;
-//        return dao.delete(producingCountry);
+        return genericService.delete(producingCountry, producingCountry.getId(), className);
     }
 
     @Override
     public ProducingCountry getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, ProducingCountry.class);
     }
 
     @Override
     public List<ProducingCountry> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, ProducingCountry.class);
     }
 }

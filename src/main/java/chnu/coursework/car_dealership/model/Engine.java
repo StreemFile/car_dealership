@@ -31,6 +31,6 @@ public class Engine {
     private int powerKW;
     @Schema(description = "Кількість кінських сил", example = "190")
     private int powerPS;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private String description;
 }

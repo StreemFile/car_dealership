@@ -21,7 +21,7 @@ import java.util.UUID;
  * @Version ModelAndPackageRestController: 1.0
  */
 @Tag(name = "ModelAndPackage",
-        description = "Відповідає за керування даними колекції ModelAndPackage")
+     description = "Відповідає за керування даними колекції ModelAndPackage")
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/modelAndPackages")
@@ -35,7 +35,7 @@ public class ModelAndPackageRestController {
             description = "Виводить всю інформацію про всі існуючі моделі"
     )
     @GetMapping
-    public List<ModelAndPackage> getAll(){
+    public List<ModelAndPackage> getAll() {
         return service.getAll();
     }
 
@@ -44,9 +44,10 @@ public class ModelAndPackageRestController {
             description = "Виводить всю інформацію про шукану модель"
     )
     @GetMapping("/get/{id}")
-    public ModelAndPackage getById(@PathVariable("id")
-                                       @Parameter(description = "ID моделі")
-                                               String id){
+    public ModelAndPackage getById(
+            @PathVariable("id")
+            @Parameter(description = "ID моделі")
+                    String id) {
         return service.getById(id);
     }
 
@@ -55,9 +56,10 @@ public class ModelAndPackageRestController {
             description = "Видаляє задану модель"
     )
     @GetMapping("/delete/{id}")
-    public ModelAndPackage delete(@PathVariable("id")
-                                      @Parameter(description = "ID моделі")
-                                              String id){
+    public ModelAndPackage delete(
+            @PathVariable("id")
+            @Parameter(description = "ID моделі")
+                    String id) {
         return service.delete(service.getById(id));
     }
 
@@ -66,9 +68,10 @@ public class ModelAndPackageRestController {
             description = "Створює нову модель"
     )
     @PostMapping("/create")
-    public ModelAndPackage create(@RequestBody
-                                @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової моделі")
-                                        ModelAndPackage modelAndPackage){
+    public ModelAndPackage create(
+            @RequestBody
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової моделі")
+                    ModelAndPackage modelAndPackage) {
         modelAndPackage.setId(UUID.randomUUID().toString());
         modelAndPackage.setCreated_at(LocalDateTime.now());
         return service.create(modelAndPackage);
@@ -79,13 +82,15 @@ public class ModelAndPackageRestController {
             description = "Шукає модель по id та надає їй оновлену інформацію"
     )
     @PostMapping("/edit/{id}")
-    public ModelAndPackage update(@PathVariable
-                                @Parameter(description = "ID моделі")
-                                        String id,
-                                @RequestBody
-                                @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої моделі")
-                                        ModelAndPackage modelAndPackage){
+    public ModelAndPackage update(
+            @PathVariable
+            @Parameter(description = "ID моделі")
+                    String id,
+            @RequestBody
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої моделі")
+                    ModelAndPackage modelAndPackage) {
         modelAndPackage.setCreated_at(service.getById(id).getCreated_at());
+        modelAndPackage.setId(service.getById(id).getId());
         return service.update(modelAndPackage);
     }
 }

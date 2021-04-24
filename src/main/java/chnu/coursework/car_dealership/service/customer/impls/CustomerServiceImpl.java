@@ -4,13 +4,18 @@ import chnu.coursework.car_dealership.dao.customer.impls.CustomerDAOImpl;
 import chnu.coursework.car_dealership.data.FakeCustomer;
 import chnu.coursework.car_dealership.model.Customer;
 import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.customer.interfaces.ICustomerService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,61 +29,40 @@ import java.util.List;
 public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
-    CustomerDAOImpl dao;
-
-    @Autowired
-    CustomerRepository repository;
-
-    @Autowired
     FakeCustomer fakeCustomer;
+
+    @Autowired
+    GenericService genericService;
+    String className = "customer";
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeCustomer.getCustomers());
+//        fakeCustomer.getCustomers().forEach(this::create);
     }
 
     @Override
     public Customer create(Customer customer) {
-        return repository.save(customer);
-//        return dao.create(customer);
+        return genericService.create(customer, customer.getId(), className);
     }
 
     @Override
     public Customer update(Customer customer) {
-        customer.setModified_at(LocalDateTime.now());
-        return repository.save(customer);
-//        return dao.update(customer);
+        return genericService.update(customer, customer.getId(), className);
     }
 
     @Override
     public Customer delete(Customer customer) {
-        repository.delete(customer);
-        return customer;
-//        return dao.delete(customer);
+        return genericService.delete(customer, customer.getId(), className);
     }
 
     @Override
     public Customer getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, Customer.class);
     }
 
     @Override
     public List<Customer> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, Customer.class);
     }
 
-    public List<Customer> getByTwoPlacesOfResidence(String name, String name2) {
-        return  repository.findAllByPlaceOfResidenceEqualsOrPlaceOfResidenceEquals(name,name2);
-    }
-    public List<Customer> getByPlaceOfResidenceAndName(String place, String name) {
-        return  repository.findAllByPlaceOfResidenceEqualsAndNameContains(place,name);
-    }
-
-    public List<Customer> getAllExceptFrom(String placeOfResidence){
-        return repository.findDistinctByPlaceOfResidenceIsNot(placeOfResidence);
-    }
-
-//    public List<Customer>
 }

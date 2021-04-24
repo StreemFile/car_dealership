@@ -3,6 +3,7 @@ package chnu.coursework.car_dealership.service.vehicleType.impls;
 import chnu.coursework.car_dealership.data.FakeVehicleType;
 import chnu.coursework.car_dealership.model.VehicleType;
 import chnu.coursework.car_dealership.repository.vehicleType.VehicleTypeRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.vehicleType.interfaces.IVehicleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,45 +25,40 @@ import java.util.List;
 public class VehicleTypeServiceImpl implements IVehicleTypeService {
 
     @Autowired
-    VehicleTypeRepository repository;
+    FakeVehicleType fakeVehicleType;
 
     @Autowired
-    FakeVehicleType fakeVehicleType;
+    GenericService genericService;
+
+    String className = "vehicleType";
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeVehicleType.getVehicleTypes());
+//        fakeVehicleType.getVehicleTypes().forEach(this::create);
     }
 
     @Override
     public VehicleType create(VehicleType vehicleType) {
-        return repository.save(vehicleType);
-//        return dao.create(vehicleType);
+        return genericService.create(vehicleType, vehicleType.getId(), className);
     }
 
     @Override
     public VehicleType update(VehicleType vehicleType) {
-        vehicleType.setModified_at(LocalDateTime.now());
-        return repository.save(vehicleType);
-//        return dao.update(vehicleType);
+        return genericService.update(vehicleType, vehicleType.getId(), className);
     }
 
     @Override
     public VehicleType delete(VehicleType vehicleType) {
-        repository.delete(vehicleType);
-        return vehicleType;
-//        return dao.delete(vehicleType);
+        return genericService.delete(vehicleType, vehicleType.getId(), className);
     }
 
     @Override
     public VehicleType getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, VehicleType.class);
     }
 
     @Override
     public List<VehicleType> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, VehicleType.class);
     }
 }

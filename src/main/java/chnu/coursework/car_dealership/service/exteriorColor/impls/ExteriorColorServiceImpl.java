@@ -2,14 +2,18 @@ package chnu.coursework.car_dealership.service.exteriorColor.impls;
 
 import chnu.coursework.car_dealership.data.FakeExteriorColor;
 import chnu.coursework.car_dealership.model.ExteriorColor;
-import chnu.coursework.car_dealership.repository.exteriorColor.ExteriorColorRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.exteriorColor.interfaces.IExteriorColorService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,45 +28,40 @@ import java.util.List;
 public class ExteriorColorServiceImpl implements IExteriorColorService {
 
     @Autowired
-    ExteriorColorRepository repository;
+    FakeExteriorColor fakeExteriorColor;
 
     @Autowired
-    FakeExteriorColor fakeExteriorColor;
+    GenericService genericService;
+
+    String className = "exteriorColor";
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeExteriorColor.getExteriorColors());
+//        fakeExteriorColor.getExteriorColors().forEach(this::create);
     }
 
     @Override
     public ExteriorColor create(ExteriorColor exteriorColor) {
-        return repository.save(exteriorColor);
-//        return dao.create(exteriorColor);
+        return genericService.create(exteriorColor, exteriorColor.getId(), className);
     }
 
     @Override
     public ExteriorColor update(ExteriorColor exteriorColor) {
-        exteriorColor.setModified_at(LocalDateTime.now());
-        return repository.save(exteriorColor);
-//        return dao.update(exteriorColor);
+        return genericService.update(exteriorColor, exteriorColor.getId(), className);
     }
 
     @Override
     public ExteriorColor delete(ExteriorColor exteriorColor) {
-        repository.delete(exteriorColor);
-        return exteriorColor;
-//        return dao.delete(exteriorColor);
+        return genericService.delete(exteriorColor, exteriorColor.getId(), className);
     }
 
     @Override
     public ExteriorColor getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, ExteriorColor.class);
     }
 
     @Override
     public List<ExteriorColor> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, ExteriorColor.class);
     }
 }

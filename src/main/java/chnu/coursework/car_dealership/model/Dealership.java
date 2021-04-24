@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class Dealership {
-    @Schema(description = "ID автосалону", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "ID автосалону")
     @Id
     private String id;
     @Schema(description = "Місто розташування", example = "Київ")
@@ -40,9 +40,9 @@ public class Dealership {
     private Company company;
     @Schema(description = "description")
     private String description;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата створення об'єтку")
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Дата останньої модифікації об'єтку")
     private LocalDateTime modified_at;
 
 }

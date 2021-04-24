@@ -12,7 +12,15 @@ import chnu.coursework.car_dealership.repository.make.MakeRepository;
 import chnu.coursework.car_dealership.repository.modelAndPackage.ModelAndPackageRepository;
 import chnu.coursework.car_dealership.repository.producingCountry.ProducingCountryRepository;
 import chnu.coursework.car_dealership.repository.vehicleType.VehicleTypeRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.automobile.interfaces.IAutomobileService;
+import chnu.coursework.car_dealership.service.dealership.impls.DealershipServiceImpl;
+import chnu.coursework.car_dealership.service.exteriorColor.impls.ExteriorColorServiceImpl;
+import chnu.coursework.car_dealership.service.interiorColor.impls.InteriorColorServiceImpl;
+import chnu.coursework.car_dealership.service.make.impls.MakeServiceImpl;
+import chnu.coursework.car_dealership.service.modelAndPackage.impls.ModelAndPackageServiceImpl;
+import chnu.coursework.car_dealership.service.producingCountry.impls.ProducingCountryServiceImpl;
+import chnu.coursework.car_dealership.service.vehicleType.impls.VehicleTypeServiceImpl;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Projections;
@@ -39,150 +47,95 @@ import static com.mongodb.client.model.Filters.*;
 public class AutomobileServiceImpl implements IAutomobileService {
 
     @Autowired
-    AutomobileRepository repository;
-
-    @Autowired
     FakeAutomobile fakeAutomobile;
 
     @Autowired
-    DealershipRepository dealershipRepository;
+    VehicleTypeServiceImpl vehicleTypeService;
 
     @Autowired
-    VehicleTypeRepository vehicleTypeRepository;
+    ProducingCountryServiceImpl producingCountryService;
 
     @Autowired
-    MakeRepository makeRepository;
+    MakeServiceImpl makeService;
 
     @Autowired
-    ModelAndPackageRepository modelAndPackageRepository;
+    ModelAndPackageServiceImpl modelAndPackageService;
 
     @Autowired
-    ExteriorColorRepository exteriorColorRepository;
+    ExteriorColorServiceImpl exteriorColorService;
 
     @Autowired
-    InteriorColorRepository interiorColorRepository;
+    InteriorColorServiceImpl interiorColorService;
 
     @Autowired
-    ProducingCountryRepository producingCountryRepository;
+    DealershipServiceImpl dealershipService;
 
     @Autowired
-    private MongoCollectionGetter mongoCollectionGetter;
+    GenericService genericService;
 
-    private ToObjectListConverter toObjectListConverter = new ToObjectListConverter();
+    String className = "automobile";
 
-    private final String collection = "automobile";
 
     @PostConstruct
     void init() {
-
-//        fakeAutomobile.getAutomobiles().get(0).setVehicleType(vehicleTypeRepository.findAll().get(6));
-//        fakeAutomobile.getAutomobiles().get(0).setExportedFrom(producingCountryRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(0).setMake(makeRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(0).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(0).setExteriorColor(exteriorColorRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(0).setInteriorColor(interiorColorRepository.findAll().get(5));
-//        fakeAutomobile.getAutomobiles().get(0).setDealership(dealershipRepository.findAll().get(1));
 //
-//        fakeAutomobile.getAutomobiles().get(1).setVehicleType(vehicleTypeRepository.findAll().get(6));
-//        fakeAutomobile.getAutomobiles().get(1).setExportedFrom(producingCountryRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(1).setMake(makeRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(1).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(1).setExteriorColor(exteriorColorRepository.findAll().get(2));
-//        fakeAutomobile.getAutomobiles().get(1).setInteriorColor(interiorColorRepository.findAll().get(5));
-//        fakeAutomobile.getAutomobiles().get(1).setDealership(dealershipRepository.findAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(0).setVehicleType(vehicleTypeService.getAll().get(6));
+//        fakeAutomobile.getAutomobiles().get(0).setExportedFrom(producingCountryService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(0).setMake(makeService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(0).setModelAndPackage(modelAndPackageService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(0).setExteriorColor(exteriorColorService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(0).setInteriorColor(interiorColorService.getAll().get(5));
+//        fakeAutomobile.getAutomobiles().get(0).setDealership(dealershipService.getAll().get(1));
 //
-//        fakeAutomobile.getAutomobiles().get(2).setVehicleType(vehicleTypeRepository.findAll().get(6));
-//        fakeAutomobile.getAutomobiles().get(2).setExportedFrom(producingCountryRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(2).setMake(makeRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(2).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(2).setExteriorColor(exteriorColorRepository.findAll().get(3));
-//        fakeAutomobile.getAutomobiles().get(2).setInteriorColor(interiorColorRepository.findAll().get(5));
-//        fakeAutomobile.getAutomobiles().get(2).setDealership(dealershipRepository.findAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(1).setVehicleType(vehicleTypeService.getAll().get(6));
+//        fakeAutomobile.getAutomobiles().get(1).setExportedFrom(producingCountryService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(1).setMake(makeService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(1).setModelAndPackage(modelAndPackageService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(1).setExteriorColor(exteriorColorService.getAll().get(2));
+//        fakeAutomobile.getAutomobiles().get(1).setInteriorColor(interiorColorService.getAll().get(5));
+//        fakeAutomobile.getAutomobiles().get(1).setDealership(dealershipService.getAll().get(1));
 //
-//        fakeAutomobile.getAutomobiles().get(3).setVehicleType(vehicleTypeRepository.findAll().get(2));
-//        fakeAutomobile.getAutomobiles().get(3).setExportedFrom(producingCountryRepository.findAll().get(1));
-//        fakeAutomobile.getAutomobiles().get(3).setMake(makeRepository.findAll().get(2));
-//        fakeAutomobile.getAutomobiles().get(3).setModelAndPackage(modelAndPackageRepository.findAll().get(1));
-//        fakeAutomobile.getAutomobiles().get(3).setExteriorColor(exteriorColorRepository.findAll().get(4));
-//        fakeAutomobile.getAutomobiles().get(3).setInteriorColor(interiorColorRepository.findAll().get(5));
-//        fakeAutomobile.getAutomobiles().get(3).setDealership(dealershipRepository.findAll().get(3));
+//        fakeAutomobile.getAutomobiles().get(2).setVehicleType(vehicleTypeService.getAll().get(6));
+//        fakeAutomobile.getAutomobiles().get(2).setExportedFrom(producingCountryService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(2).setMake(makeService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(2).setModelAndPackage(modelAndPackageService.getAll().get(0));
+//        fakeAutomobile.getAutomobiles().get(2).setExteriorColor(exteriorColorService.getAll().get(3));
+//        fakeAutomobile.getAutomobiles().get(2).setInteriorColor(interiorColorService.getAll().get(5));
+//        fakeAutomobile.getAutomobiles().get(2).setDealership(dealershipService.getAll().get(1));
 //
-//        repository.saveAll(fakeAutomobile.getAutomobiles());
+//        fakeAutomobile.getAutomobiles().get(3).setVehicleType(vehicleTypeService.getAll().get(2));
+//        fakeAutomobile.getAutomobiles().get(3).setExportedFrom(producingCountryService.getAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(3).setMake(makeService.getAll().get(2));
+//        fakeAutomobile.getAutomobiles().get(3).setModelAndPackage(modelAndPackageService.getAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(3).setExteriorColor(exteriorColorService.getAll().get(4));
+//        fakeAutomobile.getAutomobiles().get(3).setInteriorColor(interiorColorService.getAll().get(5));
+//        fakeAutomobile.getAutomobiles().get(3).setDealership(dealershipService.getAll().get(3));
+//
+//        fakeAutomobile.getAutomobiles().forEach(this::create);
     }
 
     @Override
     public Automobile create(Automobile automobile) {
-        return repository.save(automobile);
-//        return dao.create(automobile);
+        return genericService.create(automobile, automobile.getId(), className);
     }
 
     @Override
     public Automobile update(Automobile automobile) {
-        automobile.setModified_at(LocalDateTime.now());
-        return repository.save(automobile);
-//        return dao.update(automobile);
+        return genericService.update(automobile, automobile.getId(), className);
     }
 
     @Override
     public Automobile delete(Automobile automobile) {
-        repository.delete(automobile);
-        return automobile;
-//        return dao.delete(automobile);
+        return genericService.delete(automobile, automobile.getId(), className);
     }
 
     @Override
     public Automobile getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, Automobile.class);
     }
 
     @Override
     public List<Automobile> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, Automobile.class);
     }
-
-    public Object getVolkswagenWithSevenSeatsMinMaxAvgPrice() {
-        Bson project = Aggregates.project(Projections.fields(
-                Projections.excludeId(),
-                Projections.include("make", "price", "numberOfSeats")
-        ));
-
-        Bson match = Aggregates.match(eq("numberOfSeats", 7));
-
-        Bson group = Aggregates.group(
-                "$make.name",
-                Accumulators.min("minPrice", "$price"),
-                Accumulators.max("maxPrice", "$price"),
-                Accumulators.avg("avgPrice", "$price")
-        );
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                        Arrays.asList(
-                                project,
-                                match,
-                                group
-                        )
-                )
-        ).get(0);
-    }
-
-    public List<Object> getVolkswagenGearboxMin1600CubicCapacity() {
-        Bson match = Aggregates.match(and(
-                eq("make.name", "Volkswagen"),
-                eq("engine.transmissionType", "Механіка"),
-                gt("engine.cubicCapacity", 1600)
-        ));
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                        Arrays.asList(match)
-                )
-        );
-    }
-
-
-
-
 }

@@ -88,13 +88,10 @@ public class DealershipRestController {
                           @RequestBody
                                   Dealership dealership) {
         dealership.setCreated_at(service.getById(id).getCreated_at());
+        dealership.setId(service.getById(id).getId());
         return service.update(dealership);
     }
 
-    @GetMapping("/totalSalaries")
-    public Map<String,Integer> getEachDealershipTotalSalary(){
-        return service.getEachDealershipTotalSalary();
-    }
 }
 
 

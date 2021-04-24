@@ -89,13 +89,10 @@ public class MakeRestController {
 
                                Make make){
         make.setCreated_at(service.getById(id).getCreated_at());
+        make.setId(service.getById(id).getId());
         return service.update(make);
     }
 
-//    @GetMapping("/get/except/{make}")
-//    public List<Make> getAllMakesExcept(@PathVariable("make") String make){
-//        return service.getAllMakesExcept(make);
-//    }
 }
 
 

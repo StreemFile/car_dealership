@@ -86,6 +86,7 @@ public class PurchaseRestController {
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої продажі")
                                         Purchase purchase){
         purchase.setCreated_at(service.getById(id).getCreated_at());
+        purchase.setId(service.getById(id).getId());
         return service.update(purchase);
     }
 }

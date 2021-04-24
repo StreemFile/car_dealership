@@ -3,6 +3,7 @@ package chnu.coursework.car_dealership.service.interiorColor.impls;
 import chnu.coursework.car_dealership.data.FakeInteriorColor;
 import chnu.coursework.car_dealership.model.InteriorColor;
 import chnu.coursework.car_dealership.repository.interiorColor.InteriorColorRepository;
+import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.interiorColor.interfaces.IInteriorColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,45 +24,41 @@ import java.util.List;
 public class InteriorColorServiceImpl implements IInteriorColorService {
 
     @Autowired
-    InteriorColorRepository repository;
+    FakeInteriorColor fakeInteriorColor;
 
     @Autowired
-    FakeInteriorColor fakeInteriorColor;
+    GenericService genericService;
+
+    String className = "interiorColor";
 
     @PostConstruct
     void init(){
-//        repository.saveAll(fakeInteriorColor.getInteriorColors());
+//       fakeInteriorColor.getInteriorColors().forEach(this::create);
     }
 
     @Override
     public InteriorColor create(InteriorColor interiorColor) {
-        return repository.save(interiorColor);
-//        return dao.create(interiorColor);
+       return genericService.create(interiorColor, interiorColor.getId(), className);
     }
 
     @Override
     public InteriorColor update(InteriorColor interiorColor) {
         interiorColor.setModified_at(LocalDateTime.now());
-        return repository.save(interiorColor);
-//        return dao.update(interiorColor);
+       return genericService.update(interiorColor, interiorColor.getId(), className);
     }
 
     @Override
     public InteriorColor delete(InteriorColor interiorColor) {
-        repository.delete(interiorColor);
-        return interiorColor;
-//        return dao.delete(interiorColor);
+       return genericService.delete(interiorColor, interiorColor.getId(), className);
     }
 
     @Override
     public InteriorColor getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+       return genericService.getById(id, className, InteriorColor.class);
     }
 
     @Override
     public List<InteriorColor> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, InteriorColor.class);
     }
 }

@@ -86,6 +86,7 @@ public class VehicleTypeRestController {
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого кузова")
                                         VehicleType vehicleType){
         vehicleType.setCreated_at(service.getById(id).getCreated_at());
+        vehicleType.setId(service.getById(id).getId());
         return service.update(vehicleType);
     }
 }

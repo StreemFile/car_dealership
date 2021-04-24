@@ -4,9 +4,13 @@ import chnu.coursework.car_dealership.MongoCollectionGetter;
 import chnu.coursework.car_dealership.ToObjectListConverter;
 import chnu.coursework.car_dealership.data.FakeEmployee;
 import chnu.coursework.car_dealership.model.Employee;
+import chnu.coursework.car_dealership.model.Employee;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
 import chnu.coursework.car_dealership.repository.employee.EmployeeRepository;
+import chnu.coursework.car_dealership.service.GenericService;
+import chnu.coursework.car_dealership.service.dealership.impls.DealershipServiceImpl;
 import chnu.coursework.car_dealership.service.employee.interfaces.IEmployeeService;
+import com.google.gson.Gson;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Projections;
@@ -14,12 +18,14 @@ import com.mongodb.client.model.Sorts;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -36,192 +42,63 @@ import static com.mongodb.client.model.Filters.*;
 public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
-    private  EmployeeRepository repository;
-
-    @Autowired
-    private  DealershipRepository dealershipRepository;
-
-    @Autowired
     private  FakeEmployee fakeEmployee;
 
     @Autowired
-    private  MongoCollectionGetter mongoCollectionGetter;
+    DealershipServiceImpl dealershipService;
 
-    private  ToObjectListConverter toObjectListConverter = new ToObjectListConverter();
+    @Autowired
+    GenericService genericService;
 
-    private final String collection = "employee";
+    String className = "employee";
 
     @PostConstruct
     void init() {
-//        fakeEmployee.getEmployees().get(0).setDealership(dealershipRepository.findAll().get(0));
-//        fakeEmployee.getEmployees().get(1).setDealership(dealershipRepository.findAll().get(1));
-//        fakeEmployee.getEmployees().get(2).setDealership(dealershipRepository.findAll().get(2));
-//        fakeEmployee.getEmployees().get(3).setDealership(dealershipRepository.findAll().get(3));
-//        fakeEmployee.getEmployees().get(4).setDealership(dealershipRepository.findAll().get(4));
-//        fakeEmployee.getEmployees().get(5).setDealership(dealershipRepository.findAll().get(0));
-//        fakeEmployee.getEmployees().get(6).setDealership(dealershipRepository.findAll().get(1));
-//        fakeEmployee.getEmployees().get(7).setDealership(dealershipRepository.findAll().get(2));
-//        fakeEmployee.getEmployees().get(8).setDealership(dealershipRepository.findAll().get(3));
-//        fakeEmployee.getEmployees().get(9).setDealership(dealershipRepository.findAll().get(4));
-//        fakeEmployee.getEmployees().get(10).setDealership(dealershipRepository.findAll().get(0));
-//        fakeEmployee.getEmployees().get(11).setDealership(dealershipRepository.findAll().get(1));
-//        fakeEmployee.getEmployees().get(12).setDealership(dealershipRepository.findAll().get(2));
-//        fakeEmployee.getEmployees().get(13).setDealership(dealershipRepository.findAll().get(3));
-//        fakeEmployee.getEmployees().get(14).setDealership(dealershipRepository.findAll().get(4));
-//        fakeEmployee.getEmployees().get(15).setDealership(dealershipRepository.findAll().get(0));
-//        repository.saveAll(fakeEmployee.getEmployees());
+//            fakeEmployee.getEmployees().get(0).setDealership(dealershipService.getAll().get(0));
+//            fakeEmployee.getEmployees().get(1).setDealership(dealershipService.getAll().get(1));
+//            fakeEmployee.getEmployees().get(2).setDealership(dealershipService.getAll().get(2));
+//            fakeEmployee.getEmployees().get(3).setDealership(dealershipService.getAll().get(3));
+//            fakeEmployee.getEmployees().get(4).setDealership(dealershipService.getAll().get(4));
+//            fakeEmployee.getEmployees().get(5).setDealership(dealershipService.getAll().get(0));
+//            fakeEmployee.getEmployees().get(6).setDealership(dealershipService.getAll().get(1));
+//            fakeEmployee.getEmployees().get(7).setDealership(dealershipService.getAll().get(2));
+//            fakeEmployee.getEmployees().get(8).setDealership(dealershipService.getAll().get(3));
+//            fakeEmployee.getEmployees().get(9).setDealership(dealershipService.getAll().get(4));
+//            fakeEmployee.getEmployees().get(10).setDealership(dealershipService.getAll().get(0));
+//            fakeEmployee.getEmployees().get(11).setDealership(dealershipService.getAll().get(1));
+//            fakeEmployee.getEmployees().get(12).setDealership(dealershipService.getAll().get(2));
+//            fakeEmployee.getEmployees().get(13).setDealership(dealershipService.getAll().get(3));
+//            fakeEmployee.getEmployees().get(14).setDealership(dealershipService.getAll().get(4));
+//            fakeEmployee.getEmployees().get(15).setDealership(dealershipService.getAll().get(0));
+//
+//            fakeEmployee.getEmployees().forEach(this::create);
     }
 
     @Override
     public Employee create(Employee employee) {
-        return repository.save(employee);
-//        return dao.create(employee);
+
+        return genericService.create(employee, employee.getId(), className);
     }
 
     @Override
     public Employee update(Employee employee) {
-        employee.setModified_at(LocalDateTime.now());
-        return repository.save(employee);
-//        return dao.update(employee);
+        return genericService.update(employee, employee.getId(), className);
     }
 
     @Override
     public Employee delete(Employee employee) {
-        repository.delete(employee);
-        return employee;
-//        return dao.delete(employee);
+        return genericService.delete(employee, employee.getId(), className);
     }
 
     @Override
     public Employee getById(String id) {
-        return repository.findById(id).orElse(null);
-//        return dao.getById(id);
+        return genericService.getById(id, className, Employee.class);
     }
 
     @Override
     public List<Employee> getAll() {
-        return repository.findAll();
-//        return dao.getAll();
+        return genericService.getAll(className, Employee.class);
     }
-
-    public List<Object> getTotalSalaryInChernivtsiAndMamaivtsi() {
-
-        Bson match = Aggregates.match(or(
-                eq("dealership.city", "Чернівці"),
-                eq("dealership.city", "Мамаївці")
-        ));
-
-        Bson project = Aggregates.project(Projections.fields(
-                Projections.excludeId(),
-                Projections.include("dealership", "salary")
-        ));
-
-        Bson group = Aggregates.group(
-                "$dealership.city",
-                Accumulators.sum("totalSalary", "$salary")
-        );
-
-        Bson sort = Aggregates.sort(Sorts.descending("totalSalary"));
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                                Arrays.asList(
-                                        match,
-                                        project,
-                                        group,
-                                        sort
-                                )
-                )
-        );
-    }
-
-    public Object getHighestTotalSalary() {
-        Bson project = Aggregates.project(Projections.fields(
-                Projections.excludeId(),
-                Projections.include("dealership", "salary")
-        ));
-
-        Bson group = Aggregates.group(
-                "$dealership.city",
-                Accumulators.sum("totalSalary", "$salary")
-        );
-
-        Bson sort = Aggregates.sort(Sorts.descending("totalSalary"));
-
-        Bson limit = Aggregates.limit(1);
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                        Arrays.asList(
-                                project,
-                                group,
-                                sort,
-                                limit
-                        )
-                )
-        ).get(0);
-    }
-
-    public List<Object> getEmployeesWithSalaryBetween10000And14000(){
-
-        Bson match = Aggregates.match(and(
-              gte("salary",10000),
-              lte("salary",14000)
-        ));
-
-        Bson project = Aggregates.project(Projections.fields(
-                Projections.excludeId(),
-                Projections.include("salary", "name")
-        ));
-
-        Bson sort = Aggregates.sort(Sorts.descending("salary"));
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                        Arrays.asList(
-                                match,
-                                project,
-                                sort
-                        )
-                )
-        );
-    }
-
-    public List<Object> getNameAndSalary(){
-        Bson project = Aggregates.project(Projections.fields(
-           Projections.include("name","salary")
-        ));
-        return toObjectListConverter.convert(
-          mongoCollectionGetter.getCollection(collection).aggregate(
-                  Arrays.asList(
-                          project
-                  )
-          )
-        );
-    }
-
-    public List<Employee> getBySalary(int salary){
-        return repository.findBySalary(salary);
-    }
-
-    public List<Employee> getBySalaryAfter(int salary){
-        return repository.findBySalaryAfter(salary);
-    }
-
-    public List<Employee> getBySalaryAfterEquals(int salary){
-        return repository.findDistinctBySalaryGreaterThanEqual(salary);
-    }
-    public List<Employee> getBySalaryBeforeEquals(int salary){
-        return repository.findDistinctBySalaryLessThanEqual(salary);
-    }
-
-    public List<Employee> getBySalaryIn(String salaries) {
-        List<Integer> intSalaries = new ArrayList<>();
-        List<String> stringSalaries = Arrays.asList(salaries.split("_"));
-        stringSalaries.forEach(item -> intSalaries.add(Integer.valueOf(item)));
-        return repository.findDistinctBySalaryIn(intSalaries);
-    }
-
 
 
 }
