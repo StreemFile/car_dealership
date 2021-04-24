@@ -1,12 +1,10 @@
 package chnu.coursework.car_dealership;
 
-
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+
+import redis.clients.jedis.Jedis;
 
 import java.net.UnknownHostException;
 
@@ -18,6 +16,8 @@ public class CarDealershipApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Jedis jedis = new Jedis("localhost", 6379);
+        jedis.set("hello", "world");
     }
 }
 
