@@ -31,7 +31,7 @@ public class ExteriorColorServiceImpl implements IExteriorColorService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeExteriorColor.getExteriorColors());
+//        repository.saveAll(fakeExteriorColor.getExteriorColors());
     }
 
     @Override

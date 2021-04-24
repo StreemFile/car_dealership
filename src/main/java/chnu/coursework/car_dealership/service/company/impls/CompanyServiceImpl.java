@@ -31,7 +31,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeCompany.getCompany());
+//        repository.saveAll(fakeCompany.getCompany());
     }
 
     @Override

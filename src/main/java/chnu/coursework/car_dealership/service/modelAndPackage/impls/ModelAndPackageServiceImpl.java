@@ -30,7 +30,7 @@ public class ModelAndPackageServiceImpl implements IModelAndPackageService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeModelAndPackage.getModelAndPackages());
+//        repository.saveAll(fakeModelAndPackage.getModelAndPackages());
     }
 
     @Override

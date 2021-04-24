@@ -31,7 +31,7 @@ public class VehicleTypeServiceImpl implements IVehicleTypeService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeVehicleType.getVehicleTypes());
+//        repository.saveAll(fakeVehicleType.getVehicleTypes());
     }
 
     @Override

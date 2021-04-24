@@ -30,7 +30,7 @@ public class MakeServiceImpl implements IMakeService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeMake.getMakes());
+//        repository.saveAll(fakeMake.getMakes());
     }
 
     @Override

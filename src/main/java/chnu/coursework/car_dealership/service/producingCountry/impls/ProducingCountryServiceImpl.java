@@ -30,7 +30,7 @@ public class ProducingCountryServiceImpl implements IProducingCountryService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeProducingCountry.getProducingCountries());
+//        repository.saveAll(fakeProducingCountry.getProducingCountries());
     }
 
     @Override

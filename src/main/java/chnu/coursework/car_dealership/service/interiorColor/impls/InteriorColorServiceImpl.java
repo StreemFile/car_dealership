@@ -30,7 +30,7 @@ public class InteriorColorServiceImpl implements IInteriorColorService {
 
     @PostConstruct
     void init(){
-        repository.saveAll(fakeInteriorColor.getInteriorColors());
+//        repository.saveAll(fakeInteriorColor.getInteriorColors());
     }
 
     @Override
