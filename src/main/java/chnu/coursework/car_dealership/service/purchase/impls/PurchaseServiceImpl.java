@@ -2,10 +2,6 @@ package chnu.coursework.car_dealership.service.purchase.impls;
 
 import chnu.coursework.car_dealership.data.FakePurchase;
 import chnu.coursework.car_dealership.model.Purchase;
-import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository;
-import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
-import chnu.coursework.car_dealership.repository.employee.EmployeeRepository;
-import chnu.coursework.car_dealership.repository.purchase.PurchaseRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.automobile.impls.AutomobileServiceImpl;
 import chnu.coursework.car_dealership.service.customer.impls.CustomerServiceImpl;
@@ -15,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

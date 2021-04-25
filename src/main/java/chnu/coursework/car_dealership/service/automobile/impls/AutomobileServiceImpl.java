@@ -1,17 +1,8 @@
 package chnu.coursework.car_dealership.service.automobile.impls;
 
-import chnu.coursework.car_dealership.MongoCollectionGetter;
-import chnu.coursework.car_dealership.ToObjectListConverter;
 import chnu.coursework.car_dealership.data.FakeAutomobile;
 import chnu.coursework.car_dealership.model.Automobile;
-import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository;
-import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
-import chnu.coursework.car_dealership.repository.exteriorColor.ExteriorColorRepository;
-import chnu.coursework.car_dealership.repository.interiorColor.InteriorColorRepository;
-import chnu.coursework.car_dealership.repository.make.MakeRepository;
-import chnu.coursework.car_dealership.repository.modelAndPackage.ModelAndPackageRepository;
-import chnu.coursework.car_dealership.repository.producingCountry.ProducingCountryRepository;
-import chnu.coursework.car_dealership.repository.vehicleType.VehicleTypeRepository;
+
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.automobile.interfaces.IAutomobileService;
 import chnu.coursework.car_dealership.service.dealership.impls.DealershipServiceImpl;
@@ -21,19 +12,13 @@ import chnu.coursework.car_dealership.service.make.impls.MakeServiceImpl;
 import chnu.coursework.car_dealership.service.modelAndPackage.impls.ModelAndPackageServiceImpl;
 import chnu.coursework.car_dealership.service.producingCountry.impls.ProducingCountryServiceImpl;
 import chnu.coursework.car_dealership.service.vehicleType.impls.VehicleTypeServiceImpl;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Projections;
-import org.bson.conversions.Bson;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
-import static com.mongodb.client.model.Filters.*;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
