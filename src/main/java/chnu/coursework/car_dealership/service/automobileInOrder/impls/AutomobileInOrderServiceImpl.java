@@ -34,10 +34,10 @@ public class AutomobileInOrderServiceImpl implements IAutomobileInOrderService {
 
     @PostConstruct
     void init(){
-        fakeAutomobileInOrder.getAutomobileInOrders()
-                             .get(0)
-                             .setAutomobile(fakeAutomobile.getAutomobiles().get(3));
-        repository.saveAll(fakeAutomobileInOrder.getAutomobileInOrders());
+//        fakeAutomobileInOrder.getAutomobileInOrders()
+//                             .get(0)
+//                             .setAutomobile(fakeAutomobile.getAutomobiles().get(3));
+//        repository.saveAll(fakeAutomobileInOrder.getAutomobileInOrders());
     }
 
     @Override
