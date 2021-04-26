@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class Purchase {
-    @Schema(description = "ID продажі")
+    @Schema(description = "ID продажі", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "Проданий автомобіль")
@@ -42,8 +42,8 @@ public class Purchase {
     private LocalDate purchaseDate;
     @Schema(description = "Опис")
     private String description;
-    @Schema(description = "Дата створення об'єтку")
+    @Schema(description = "Дата створення об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку")
+    @Schema(description = "Дата останньої модифікації об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime modified_at;
 }

@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class Employee {
-    @Schema(description = "ID працівника")
+    @Schema(description = "ID працівника", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "ПІП працівника", example = "Мойсей Володимир Володимирович")
@@ -40,9 +40,9 @@ public class Employee {
     private int salary;
     @Schema(description = "description")
     private String description;
-    @Schema(description = "Дата створення об'єтку")
+    @Schema(description = "Дата створення об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку")
+    @Schema(description = "Дата останньої модифікації об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime modified_at;
 }
 

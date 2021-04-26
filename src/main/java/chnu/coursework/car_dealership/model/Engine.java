@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Engine {
-    @Schema(description = "Тип топлива", example = "Дизель")
+    @Schema(description = "Тип топлива", example = "Дизель", accessMode = Schema.AccessMode.READ_ONLY)
     private String fuelType;
     @Schema(description = "Коробка передач", example = "Автомат")
     private String transmissionType;
@@ -31,6 +31,6 @@ public class Engine {
     private int powerKW;
     @Schema(description = "Кількість кінських сил", example = "190")
     private int powerPS;
-    @Schema(description = "Дата створення об'єтку")
+    @Schema(description = "Дата створення об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private String description;
 }

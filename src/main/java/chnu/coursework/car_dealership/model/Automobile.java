@@ -23,7 +23,7 @@ import java.util.List;
 @Builder
 @Document
 public class Automobile {
-    @Schema(description = "ID автомобіля")
+    @Schema(description = "ID автомобіля", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "Тип кузова")
@@ -78,8 +78,8 @@ public class Automobile {
     private String title;
     @Schema(description = "Детальний опис")
     private String description;
-    @Schema(description = "Дата створення об'єтку")
+    @Schema(description = "Дата створення об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку")
+    @Schema(description = "Дата останньої модифікації об'єтку", accessMode = Schema.AccessMode.READ_ONLY )
     private LocalDateTime modified_at;
 }

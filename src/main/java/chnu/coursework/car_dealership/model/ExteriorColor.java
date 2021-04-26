@@ -26,16 +26,16 @@ import java.time.LocalDateTime;
 @Builder
 @Document
 public class ExteriorColor {
-    @Schema(description = "ID кольору")
+    @Schema(description = "ID кольору", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "Колір", example = "Білий")
     private String exteriorColor;
     @Schema(description = "Опис")
     private String description;
-    @Schema(description = "Дата створення об'єтку")
+    @Schema(description = "Дата створення об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime created_at;
-    @Schema(description = "Дата останньої модифікації об'єтку")
+    @Schema(description = "Дата останньої модифікації об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime modified_at;
 
 }
