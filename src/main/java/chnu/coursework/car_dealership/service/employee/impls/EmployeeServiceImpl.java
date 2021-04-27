@@ -1,33 +1,15 @@
 package chnu.coursework.car_dealership.service.employee.impls;
 
-import chnu.coursework.car_dealership.MongoCollectionGetter;
-import chnu.coursework.car_dealership.ToObjectListConverter;
 import chnu.coursework.car_dealership.data.FakeEmployee;
 import chnu.coursework.car_dealership.model.Employee;
-import chnu.coursework.car_dealership.model.Employee;
-import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
-import chnu.coursework.car_dealership.repository.employee.EmployeeRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.dealership.impls.DealershipServiceImpl;
 import chnu.coursework.car_dealership.service.employee.interfaces.IEmployeeService;
-import com.google.gson.Gson;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Projections;
-import com.mongodb.client.model.Sorts;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.mongodb.client.model.Filters.*;
 
 /**
  * Created by IntelliJ IDEA.

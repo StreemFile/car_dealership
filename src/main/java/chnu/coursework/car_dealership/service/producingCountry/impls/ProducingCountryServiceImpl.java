@@ -2,14 +2,12 @@ package chnu.coursework.car_dealership.service.producingCountry.impls;
 
 import chnu.coursework.car_dealership.data.FakeProducingCountry;
 import chnu.coursework.car_dealership.model.ProducingCountry;
-import chnu.coursework.car_dealership.repository.producingCountry.ProducingCountryRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.producingCountry.interfaces.IProducingCountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

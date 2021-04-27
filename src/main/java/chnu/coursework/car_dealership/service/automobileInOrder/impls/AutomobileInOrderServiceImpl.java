@@ -1,9 +1,7 @@
 package chnu.coursework.car_dealership.service.automobileInOrder.impls;
 
-import chnu.coursework.car_dealership.data.FakeAutomobile;
 import chnu.coursework.car_dealership.data.FakeAutomobileInOrder;
 import chnu.coursework.car_dealership.model.AutomobileInOrder;
-import chnu.coursework.car_dealership.repository.automobileInOrder.AutomobileInOrderRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.automobile.impls.AutomobileServiceImpl;
 import chnu.coursework.car_dealership.service.automobileInOrder.interfaces.IAutomobileInOrderService;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

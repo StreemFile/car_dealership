@@ -2,7 +2,6 @@ package chnu.coursework.car_dealership.service.interiorColor.impls;
 
 import chnu.coursework.car_dealership.data.FakeInteriorColor;
 import chnu.coursework.car_dealership.model.InteriorColor;
-import chnu.coursework.car_dealership.repository.interiorColor.InteriorColorRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.interiorColor.interfaces.IInteriorColorService;
 import org.springframework.beans.factory.annotation.Autowired;

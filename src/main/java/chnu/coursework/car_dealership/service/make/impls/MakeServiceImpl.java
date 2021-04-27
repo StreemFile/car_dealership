@@ -2,14 +2,12 @@ package chnu.coursework.car_dealership.service.make.impls;
 
 import chnu.coursework.car_dealership.data.FakeMake;
 import chnu.coursework.car_dealership.model.Make;
-import chnu.coursework.car_dealership.repository.make.MakeRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.make.interfaces.IMakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

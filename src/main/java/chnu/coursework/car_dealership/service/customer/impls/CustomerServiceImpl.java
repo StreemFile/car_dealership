@@ -1,21 +1,14 @@
 package chnu.coursework.car_dealership.service.customer.impls;
 
-import chnu.coursework.car_dealership.dao.customer.impls.CustomerDAOImpl;
 import chnu.coursework.car_dealership.data.FakeCustomer;
 import chnu.coursework.car_dealership.model.Customer;
-import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.customer.interfaces.ICustomerService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.

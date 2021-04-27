@@ -1,12 +1,10 @@
 package chnu.coursework.car_dealership.service;
 
-import chnu.coursework.car_dealership.model.Company;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 
 import java.lang.reflect.Type;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,6 +54,7 @@ public class GenericService {
     public <T> List<T> getAll(String className, Class<T> classType) {
         List<String> items = Arrays.stream(jedis.get(className)
                                                     .trim()
+                                                    .replace("  "," ")
                                                     .split(" "))
                                        .collect(Collectors.toList());
         List<T> result = items.stream()

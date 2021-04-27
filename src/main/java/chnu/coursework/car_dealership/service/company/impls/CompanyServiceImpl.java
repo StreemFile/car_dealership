@@ -2,20 +2,13 @@ package chnu.coursework.car_dealership.service.company.impls;
 
 import chnu.coursework.car_dealership.data.FakeCompany;
 import chnu.coursework.car_dealership.model.Company;
-import chnu.coursework.car_dealership.model.Customer;
-import chnu.coursework.car_dealership.repository.company.CompanyRepository;
 import chnu.coursework.car_dealership.service.GenericService;
 import chnu.coursework.car_dealership.service.company.interfaces.ICompanyService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
