@@ -95,6 +95,11 @@ public class DealershipRestController {
     public Map<String,Integer> getEachDealershipTotalSalary(){
         return service.getEachDealershipTotalSalary();
     }
+
+    @GetMapping("/getIdByEnglishCityName/{cityName}")
+    public String getIdByEnglishCityName(@PathVariable String cityName){
+        return service.getIdByEnglishCityName(cityName);
+    }
 }
 
 

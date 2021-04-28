@@ -100,4 +100,12 @@ public class DealershipServiceImpl implements IDealershipService {
                                },
                                LinkedHashMap::new));
     }
+    
+    public String getIdByEnglishCityName(String city){
+        Dealership dealership = repository.findAll().stream().filter(item -> item.getCityEnglish().equals(city)).findFirst().orElse(null);
+        if(dealership != null){
+            return dealership.getId();
+        }
+        return null;
+    }
 }
