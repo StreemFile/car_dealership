@@ -85,6 +85,7 @@ public class ModelAndPackageRestController {
                                 @RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої моделі")
                                         ModelAndPackage modelAndPackage){
+        modelAndPackage.setId(service.getById(id).getId());
         modelAndPackage.setCreated_at(service.getById(id).getCreated_at());
         return service.update(modelAndPackage);
     }

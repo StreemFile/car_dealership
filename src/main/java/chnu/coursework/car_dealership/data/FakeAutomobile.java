@@ -1,8 +1,6 @@
 package chnu.coursework.car_dealership.data;
 
 import chnu.coursework.car_dealership.model.*;
-import chnu.coursework.car_dealership.model.engine.FuelType;
-import chnu.coursework.car_dealership.model.engine.TransmissionType;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -30,9 +28,7 @@ public class FakeAutomobile {
                             .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
-                            .engine(new Engine(FuelType.DIESEL.toString(),
-                                    TransmissionType.MANUAL_GEARBOX.toString(),
-                                    1968, 110, 150, ""))
+                            .engine(null)
                             .exteriorColor(null)
                             .parkingSensors(
                                     Arrays.asList(
@@ -97,9 +93,7 @@ public class FakeAutomobile {
                             .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
-                            .engine(new Engine(FuelType.DIESEL.toString(),
-                                    TransmissionType.AUTOMATIC.toString(),
-                                    1968, 140, 190, ""))
+                            .engine(null)
                             .exteriorColor(null)
                             .parkingSensors(
                                     Arrays.asList(ParkingSensor.FRONT.toString(),
@@ -163,9 +157,7 @@ public class FakeAutomobile {
                             .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
-                            .engine(new Engine(FuelType.DIESEL.toString(),
-                                    TransmissionType.MANUAL_GEARBOX.toString(),
-                                    1598, 81, 110, ""))
+                            .engine(null)
                             .exteriorColor(null)
                             .parkingSensors(Arrays.asList(ParkingSensor.REAR.toString()))
                             .securities(
@@ -217,9 +209,7 @@ public class FakeAutomobile {
                             .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
-                            .engine(new Engine(FuelType.DIESEL.toString(),
-                                    TransmissionType.MANUAL_GEARBOX.toString(),
-                                    998, 92, 125, ""))
+                            .engine(null)
                             .exteriorColor(null)
                             .securities(
                                     Arrays.asList(

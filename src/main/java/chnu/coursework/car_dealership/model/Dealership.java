@@ -6,9 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.time.LocalDateTime;
+
+import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,7 +26,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
+@Node
 public class Dealership {
     @Schema(description = "ID автосалону", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
@@ -37,6 +40,7 @@ public class Dealership {
     @Schema(description = "Номер телефону", example = "+380503748394")
     private String telephone;
     @Schema(description = "Компанія, яка володіє автосалоном")
+    @Relationship(type = "DEALERSHIP_OWNER", direction = INCOMING)
     private Company company;
     @Schema(description = "description")
     private String description;

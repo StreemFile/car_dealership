@@ -86,6 +86,7 @@ public class CustomerRestController {
                            @RequestBody
                            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого покупця")
                                    Customer customer) {
+        customer.setId(service.getById(id).getId());
         customer.setCreated_at(service.getById(id).getCreated_at());
         return service.update(customer);
     }

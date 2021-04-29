@@ -6,10 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import static org.springframework.data.neo4j.core.schema.Relationship.Direction.INCOMING;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,12 +28,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
+@Node
 public class AutomobileInOrder {
     @Schema(description = "ID замовлення", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
     private String id;
     @Schema(description = "Замовлений автомобіль")
+    @Relationship(type = "ORDERED_CAR", direction = INCOMING)
     private Automobile automobile;
     @Schema(description = "Очікувана дата прибуття")
     private LocalDate expectedArrivalDate;

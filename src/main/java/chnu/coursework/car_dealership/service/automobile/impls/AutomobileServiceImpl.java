@@ -6,6 +6,7 @@ import chnu.coursework.car_dealership.data.FakeAutomobile;
 import chnu.coursework.car_dealership.model.Automobile;
 import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
+import chnu.coursework.car_dealership.repository.engine.EngineRepository;
 import chnu.coursework.car_dealership.repository.exteriorColor.ExteriorColorRepository;
 import chnu.coursework.car_dealership.repository.interiorColor.InteriorColorRepository;
 import chnu.coursework.car_dealership.repository.make.MakeRepository;
@@ -13,19 +14,12 @@ import chnu.coursework.car_dealership.repository.modelAndPackage.ModelAndPackage
 import chnu.coursework.car_dealership.repository.producingCountry.ProducingCountryRepository;
 import chnu.coursework.car_dealership.repository.vehicleType.VehicleTypeRepository;
 import chnu.coursework.car_dealership.service.automobile.interfaces.IAutomobileService;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Projections;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
-
-import static com.mongodb.client.model.Filters.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -66,6 +60,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
     ProducingCountryRepository producingCountryRepository;
 
     @Autowired
+    EngineRepository engineRepository;
+
+    @Autowired
     private MongoCollectionGetter mongoCollectionGetter;
 
     private ToObjectListConverter toObjectListConverter = new ToObjectListConverter();
@@ -82,6 +79,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(0).setExteriorColor(exteriorColorRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setInteriorColor(interiorColorRepository.findAll().get(5));
 //        fakeAutomobile.getAutomobiles().get(0).setDealership(dealershipRepository.findAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(0).setEngine(engineRepository.findAll().get(0));
 //
 //        fakeAutomobile.getAutomobiles().get(1).setVehicleType(vehicleTypeRepository.findAll().get(6));
 //        fakeAutomobile.getAutomobiles().get(1).setExportedFrom(producingCountryRepository.findAll().get(0));
@@ -90,6 +88,8 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(1).setExteriorColor(exteriorColorRepository.findAll().get(2));
 //        fakeAutomobile.getAutomobiles().get(1).setInteriorColor(interiorColorRepository.findAll().get(5));
 //        fakeAutomobile.getAutomobiles().get(1).setDealership(dealershipRepository.findAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(1).setEngine(engineRepository.findAll().get(1));
+//
 //
 //        fakeAutomobile.getAutomobiles().get(2).setVehicleType(vehicleTypeRepository.findAll().get(6));
 //        fakeAutomobile.getAutomobiles().get(2).setExportedFrom(producingCountryRepository.findAll().get(0));
@@ -98,6 +98,8 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(2).setExteriorColor(exteriorColorRepository.findAll().get(3));
 //        fakeAutomobile.getAutomobiles().get(2).setInteriorColor(interiorColorRepository.findAll().get(5));
 //        fakeAutomobile.getAutomobiles().get(2).setDealership(dealershipRepository.findAll().get(1));
+//        fakeAutomobile.getAutomobiles().get(2).setEngine(engineRepository.findAll().get(2));
+//
 //
 //        fakeAutomobile.getAutomobiles().get(3).setVehicleType(vehicleTypeRepository.findAll().get(2));
 //        fakeAutomobile.getAutomobiles().get(3).setExportedFrom(producingCountryRepository.findAll().get(1));
@@ -106,6 +108,8 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //        fakeAutomobile.getAutomobiles().get(3).setExteriorColor(exteriorColorRepository.findAll().get(4));
 //        fakeAutomobile.getAutomobiles().get(3).setInteriorColor(interiorColorRepository.findAll().get(5));
 //        fakeAutomobile.getAutomobiles().get(3).setDealership(dealershipRepository.findAll().get(3));
+//        fakeAutomobile.getAutomobiles().get(3).setEngine(engineRepository.findAll().get(3));
+//
 //
 //        repository.saveAll(fakeAutomobile.getAutomobiles());
     }
@@ -141,48 +145,4 @@ public class AutomobileServiceImpl implements IAutomobileService {
         return repository.findAll();
 //        return dao.getAll();
     }
-
-    public Object getVolkswagenWithSevenSeatsMinMaxAvgPrice() {
-        Bson project = Aggregates.project(Projections.fields(
-                Projections.excludeId(),
-                Projections.include("make", "price", "numberOfSeats")
-        ));
-
-        Bson match = Aggregates.match(eq("numberOfSeats", 7));
-
-        Bson group = Aggregates.group(
-                "$make.name",
-                Accumulators.min("minPrice", "$price"),
-                Accumulators.max("maxPrice", "$price"),
-                Accumulators.avg("avgPrice", "$price")
-        );
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                        Arrays.asList(
-                                project,
-                                match,
-                                group
-                        )
-                )
-        ).get(0);
-    }
-
-    public List<Object> getVolkswagenGearboxMin1600CubicCapacity() {
-        Bson match = Aggregates.match(and(
-                eq("make.name", "Volkswagen"),
-                eq("engine.transmissionType", "Механіка"),
-                gt("engine.cubicCapacity", 1600)
-        ));
-
-        return toObjectListConverter.convert(
-                mongoCollectionGetter.getCollection(collection).aggregate(
-                        Arrays.asList(match)
-                )
-        );
-    }
-
-
-
-
 }

@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+
+import java.time.LocalDateTime;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,7 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Node
 public class Engine {
+    @Schema(description = "ID мотора", accessMode = Schema.AccessMode.READ_ONLY)
+    @Id
+    private String id;
     @Schema(description = "Тип топлива", example = "Дизель")
     private String fuelType;
     @Schema(description = "Коробка передач", example = "Автомат")
@@ -31,6 +39,10 @@ public class Engine {
     private int powerKW;
     @Schema(description = "Кількість кінських сил", example = "190")
     private int powerPS;
-    @Schema(description = "Дата створення об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "description")
     private String description;
+    @Schema(description = "Дата створення об'єтку", accessMode = Schema.AccessMode.READ_ONLY)
+    private LocalDateTime created_at;
+    @Schema(description = "Дата останньої модифікації об'єтку",accessMode = Schema.AccessMode.READ_ONLY)
+    private LocalDateTime modified_at;
 }

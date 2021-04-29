@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.neo4j.core.schema.Node;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
+@Node
 public class Company {
     @Schema(description = "ID компанії", accessMode = Schema.AccessMode.READ_ONLY)
     @Id

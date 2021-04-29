@@ -86,51 +86,8 @@ public class EmployeeRestController {
                            @RequestBody
                            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані зміненого працівника")
                                    Employee employee){
+        employee.setId(service.getById(id).getId());
         employee.setCreated_at(service.getById(id).getCreated_at());
         return service.update(employee);
     }
-//
-//    @GetMapping("/get/totalSalary/chernivtsiAndMamaivtsi")
-//    public List<Object> getTotalSalaryInChernivtsiAndMamaivtsi(){
-//        return service.getTotalSalaryInChernivtsiAndMamaivtsi();
-//    }
-//
-//    @GetMapping("/get/totalSalary/highest")
-//    public Object getHighestTotalSalary(){
-//        return service.getHighestTotalSalary();
-//    }
-//
-//    @GetMapping("/get/salary/between/10000and14000")
-//    public List<Object> getEmployeesWithSalaryBetween10000And14000(){
-//        return service.getEmployeesWithSalaryBetween10000And14000();
-//    }
-//
-//    @GetMapping("/get/name/salary")
-//    public List<Object> getNameAndSalary(){
-//        return service.getNameAndSalary();
-//    }
-
-//    @GetMapping("/get/bySalary/{salary}")
-//    public List<Employee> getBySalary(@PathVariable int salary){
-//        return service.getBySalary(salary);
-//    }
-//
-//    @GetMapping("/get/bySalary/after/{salary}")
-//    public List<Employee> getBySalaryAfter(@PathVariable int salary){
-//        return service.getBySalaryAfter(salary);
-//    }
-//
-//    @GetMapping("/get/bySalary/afterEquals/{salary}")
-//    public List<Employee> getBySalaryAfterEquals(@PathVariable int salary){
-//        return service.getBySalaryAfterEquals(salary);
-//    }
-//
-//    @GetMapping("/get/bySalary/beforeEquals/{salary}")
-//    public List<Employee> getBySalaryBeforeEquals(@PathVariable int salary){
-//        return service.getBySalaryBeforeEquals(salary);
-//    }
-//    @GetMapping("/get/bySalaries/in/{salaries}")
-//    public List<Employee> getBySalaryIn(@PathVariable String salaries) {
-//        return service.getBySalaryIn(salaries);
-//    }
 }

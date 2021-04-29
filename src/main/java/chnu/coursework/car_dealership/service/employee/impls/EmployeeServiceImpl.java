@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -199,29 +198,5 @@ public class EmployeeServiceImpl implements IEmployeeService {
           )
         );
     }
-
-    public List<Employee> getBySalary(int salary){
-        return repository.findBySalary(salary);
-    }
-
-    public List<Employee> getBySalaryAfter(int salary){
-        return repository.findBySalaryAfter(salary);
-    }
-
-    public List<Employee> getBySalaryAfterEquals(int salary){
-        return repository.findDistinctBySalaryGreaterThanEqual(salary);
-    }
-    public List<Employee> getBySalaryBeforeEquals(int salary){
-        return repository.findDistinctBySalaryLessThanEqual(salary);
-    }
-
-    public List<Employee> getBySalaryIn(String salaries) {
-        List<Integer> intSalaries = new ArrayList<>();
-        List<String> stringSalaries = Arrays.asList(salaries.split("_"));
-        stringSalaries.forEach(item -> intSalaries.add(Integer.valueOf(item)));
-        return repository.findDistinctBySalaryIn(intSalaries);
-    }
-
-
 
 }

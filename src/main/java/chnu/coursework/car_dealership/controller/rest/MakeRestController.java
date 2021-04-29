@@ -88,6 +88,7 @@ public class MakeRestController {
                        @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої марки")
 
                                Make make){
+        make.setId(service.getById(id).getId());
         make.setCreated_at(service.getById(id).getCreated_at());
         return service.update(make);
     }
