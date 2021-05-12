@@ -73,6 +73,7 @@ public class DealershipRestController {
                                   Dealership dealership) {
         dealership.setId(UUID.randomUUID().toString());
         dealership.setCreated_at(LocalDateTime.now());
+        dealership.setModified_at(LocalDateTime.now());
         return service.create(dealership);
     }
 
@@ -87,6 +88,7 @@ public class DealershipRestController {
                           @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані зміненого автосалону")
                           @RequestBody
                                   Dealership dealership) {
+        dealership.setId(service.getById(id).getId());
         dealership.setCreated_at(service.getById(id).getCreated_at());
         return service.update(dealership);
     }

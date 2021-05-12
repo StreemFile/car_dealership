@@ -1,10 +1,7 @@
 package chnu.coursework.car_dealership.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,11 +20,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document
 public class ModelAndPackage {
     @Schema(description = "ID моделі", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
+    @EqualsAndHashCode.Include()
     private String id;
+    private Make make;
     @Schema(description = "Модель", example = "Touran")
     private String model;
     @Schema(description = "Комплектація", example = "Highline")

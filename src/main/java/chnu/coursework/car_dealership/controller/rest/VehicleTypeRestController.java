@@ -71,6 +71,7 @@ public class VehicleTypeRestController {
                                         VehicleType vehicleType){
         vehicleType.setId(UUID.randomUUID().toString());
         vehicleType.setCreated_at(LocalDateTime.now());
+        vehicleType.setModified_at(LocalDateTime.now());
         return service.create(vehicleType);
     }
 
@@ -85,6 +86,7 @@ public class VehicleTypeRestController {
                                 @RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого кузова")
                                         VehicleType vehicleType){
+        vehicleType.setId(service.getById(id).getId());
         vehicleType.setCreated_at(service.getById(id).getCreated_at());
         return service.update(vehicleType);
     }

@@ -1,10 +1,12 @@
 package chnu.coursework.car_dealership.service.dealership.impls;
 
 import chnu.coursework.car_dealership.data.FakeDealership;
+import chnu.coursework.car_dealership.model.AutomobileAvailability;
 import chnu.coursework.car_dealership.model.Dealership;
 import chnu.coursework.car_dealership.model.Employee;
 import chnu.coursework.car_dealership.repository.company.CompanyRepository;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
+import chnu.coursework.car_dealership.service.automobile.impls.AutomobileServiceImpl;
 import chnu.coursework.car_dealership.service.dealership.interfaces.IDealershipService;
 import chnu.coursework.car_dealership.service.employee.impls.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class DealershipServiceImpl implements IDealershipService {
     EmployeeServiceImpl employeeService;
 
     @Autowired
+    AutomobileServiceImpl automobileService;
+
+    @Autowired
     FakeDealership fakeDealership;
 
     @PostConstruct
@@ -59,6 +64,8 @@ public class DealershipServiceImpl implements IDealershipService {
     @Override
     public Dealership update(Dealership dealership) {
         dealership.setModified_at(LocalDateTime.now());
+        updateAutomobileWhenDealershipIsUpdated(dealership);
+        updateEmployeeWhenDealershipIsUpdated(dealership);
         return repository.save(dealership);
 //        return dao.update(dealership);
     }
@@ -84,28 +91,57 @@ public class DealershipServiceImpl implements IDealershipService {
 
     public Map<String, Integer> getEachDealershipTotalSalary() {
         return employeeService.getAll()
-                       .stream()
-                       .collect(Collectors.groupingBy(
-                               item -> item.getDealership().getCity(),
-                               Collectors.summingInt(Employee::getSalary)
-                                                     ))
-                       .entrySet()
-                       .stream()
-                       .sorted(Map.Entry.comparingByValue())
-                       .collect(Collectors.toMap(
-                               item -> item.getKey(),
-                               item -> item.getValue(),
-                               (u, v) -> {
-                                   throw new IllegalStateException(String.format("Duplicate key %s", u));
-                               },
-                               LinkedHashMap::new));
+                              .stream()
+                              .collect(Collectors.groupingBy(
+                                      item -> item.getDealership().getCity(),
+                                      Collectors.summingInt(Employee::getSalary)
+                                                            ))
+                              .entrySet()
+                              .stream()
+                              .sorted(Map.Entry.comparingByValue())
+                              .collect(Collectors.toMap(
+                                      item -> item.getKey(),
+                                      item -> item.getValue(),
+                                      (u, v) -> {
+                                          throw new IllegalStateException(String.format("Duplicate key %s", u));
+                                      },
+                                      LinkedHashMap::new));
     }
-    
-    public String getIdByEnglishCityName(String city){
-        Dealership dealership = repository.findAll().stream().filter(item -> item.getCityEnglish().equals(city)).findFirst().orElse(null);
-        if(dealership != null){
+
+    public String getIdByEnglishCityName(String city) {
+        Dealership dealership = repository.findAll()
+                                          .stream()
+                                          .filter(item -> item.getCityEnglish().equals(city))
+                                          .findFirst()
+                                          .orElse(null);
+        if (dealership != null) {
             return dealership.getId();
         }
         return null;
+    }
+
+    private void updateAutomobileWhenDealershipIsUpdated(Dealership dealership) {
+        automobileService.getAll()
+                         .stream()
+                         .filter(item -> item.getDealership().equals(dealership))
+                         .filter(item -> !item.getAvailability()
+                                              .equals(AutomobileAvailability.SOLD
+                                                              .toString()))
+                         .collect(Collectors.toList())
+                         .forEach(item -> {
+                             item.setDealership(dealership);
+                             automobileService.update(item);
+                         });
+    }
+
+    private void updateEmployeeWhenDealershipIsUpdated(Dealership dealership) {
+        employeeService.getAll()
+                       .stream()
+                       .filter(item -> item.getDealership().equals(dealership))
+                       .collect(Collectors.toList())
+                       .forEach(item -> {
+                           item.setDealership(dealership);
+                           employeeService.update(item);
+                       });
     }
 }

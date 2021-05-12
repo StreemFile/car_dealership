@@ -67,6 +67,7 @@ public class AutomobileRestController {
                                          Automobile automobile){
         automobile.setId(UUID.randomUUID().toString());
         automobile.setCreated_at(LocalDateTime.now());
+        automobile.setModified_at(LocalDateTime.now());
         return service.create(automobile);
     }
 
@@ -81,8 +82,14 @@ public class AutomobileRestController {
                              @RequestBody
                              @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого автомобіля")
                                      Automobile automobile){
+        automobile.setId(service.getById(id).getId());
         automobile.setCreated_at(service.getById(id).getCreated_at());
         return service.update(automobile);
+    }
+
+    @GetMapping("/filter/city-is-{city}")
+    public List<Automobile> getAllByDealershipCity(@PathVariable String city){
+        return service.getAllByDealershipCity(city);
     }
 
 //    @GetMapping("/get/make/volkswagen/seats/seven/minMaxAvg")

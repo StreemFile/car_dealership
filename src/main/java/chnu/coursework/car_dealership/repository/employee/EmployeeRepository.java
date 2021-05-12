@@ -13,5 +13,10 @@ public interface EmployeeRepository extends MongoRepository<Employee,String> {
      List<Employee> findDistinctBySalaryGreaterThanEqual(int salary);
      List<Employee> findDistinctBySalaryLessThanEqual(int salary);
      List<Employee> findDistinctBySalaryIn(List<Integer> salary);
-
+     List<Employee> findByOrderByNameAsc();
+     List<Employee> findByOrderByNameDesc();
+     List<Employee> findByOrderByDealershipCityAsc();
+     List<Employee> findByOrderByDealershipCityDesc();
+     List<Employee> findByOrderBySalaryAsc();
+     List<Employee> findByOrderBySalaryDesc();
 }

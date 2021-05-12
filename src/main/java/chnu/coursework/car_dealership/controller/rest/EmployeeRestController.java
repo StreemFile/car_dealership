@@ -72,6 +72,7 @@ public class EmployeeRestController {
                                        Employee employee){
         employee.setId(UUID.randomUUID().toString());
         employee.setCreated_at(LocalDateTime.now());
+        employee.setModified_at(LocalDateTime.now());
         return service.create(employee);
     }
 
@@ -86,8 +87,39 @@ public class EmployeeRestController {
                            @RequestBody
                            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані зміненого працівника")
                                    Employee employee){
+        employee.setId(service.getById(id).getId());
         employee.setCreated_at(service.getById(id).getCreated_at());
         return service.update(employee);
+    }
+
+    @GetMapping("/get/nameAsc")
+    public List<Employee> getAllByNameAsc(){
+        return service.getAllByNameAsc();
+    }
+
+    @GetMapping("/get/nameDesc")
+    public List<Employee> getAllByNameDesc(){
+        return service.getAllByNameDesc();
+    }
+
+    @GetMapping("/get/dealershipCityAsc")
+    public List<Employee> getAllByDealershipCityAsc(){
+        return service.getAllByDealershipCityAsc();
+    }
+
+    @GetMapping("/get/dealershipCityDesc")
+    public List<Employee> getAllByDealershipCityDesc(){
+        return service.getAllByDealershipCityDesc();
+    }
+
+    @GetMapping("/get/salaryDesc")
+    public List<Employee> getAllBySalaryDesc(){
+        return service.getAllBySalaryDesc();
+    }
+
+    @GetMapping("/get/salaryAsc")
+    public List<Employee> getAllBySalaryAsc(){
+        return service.getAllBySalaryAsc();
     }
 //
 //    @GetMapping("/get/totalSalary/chernivtsiAndMamaivtsi")

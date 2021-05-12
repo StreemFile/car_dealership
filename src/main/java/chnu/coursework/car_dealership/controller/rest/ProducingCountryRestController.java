@@ -71,6 +71,7 @@ public class ProducingCountryRestController {
                                         ProducingCountry producingCountry){
         producingCountry.setId(UUID.randomUUID().toString());
         producingCountry.setCreated_at(LocalDateTime.now());
+        producingCountry.setModified_at(LocalDateTime.now());
         return service.create(producingCountry);
     }
 
@@ -85,6 +86,7 @@ public class ProducingCountryRestController {
                                 @RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої країни")
                                         ProducingCountry producingCountry){
+        producingCountry.setId(service.getById(id).getId());
         producingCountry.setCreated_at(service.getById(id).getCreated_at());
         return service.update(producingCountry);
     }

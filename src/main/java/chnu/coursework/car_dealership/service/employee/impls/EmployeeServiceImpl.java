@@ -104,6 +104,30 @@ public class EmployeeServiceImpl implements IEmployeeService {
 //        return dao.getAll();
     }
 
+    public List<Employee> getAllByNameAsc(){
+        return repository.findByOrderByNameAsc();
+    }
+
+    public List<Employee> getAllByNameDesc(){
+        return repository.findByOrderByNameDesc();
+    }
+
+    public List<Employee> getAllByDealershipCityAsc(){
+        return repository.findByOrderByDealershipCityAsc();
+    }
+
+    public List<Employee> getAllByDealershipCityDesc(){
+        return repository.findByOrderByDealershipCityDesc();
+    }
+
+    public List<Employee> getAllBySalaryDesc(){
+        return repository.findByOrderBySalaryDesc();
+    }
+
+    public List<Employee> getAllBySalaryAsc(){
+        return repository.findByOrderBySalaryAsc();
+    }
+
     public List<Object> getTotalSalaryInChernivtsiAndMamaivtsi() {
 
         Bson match = Aggregates.match(or(

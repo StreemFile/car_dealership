@@ -4,6 +4,7 @@ import chnu.coursework.car_dealership.MongoCollectionGetter;
 import chnu.coursework.car_dealership.ToObjectListConverter;
 import chnu.coursework.car_dealership.data.FakeAutomobile;
 import chnu.coursework.car_dealership.model.Automobile;
+import chnu.coursework.car_dealership.model.AutomobileAvailability;
 import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
 import chnu.coursework.car_dealership.repository.exteriorColor.ExteriorColorRepository;
@@ -13,6 +14,7 @@ import chnu.coursework.car_dealership.repository.modelAndPackage.ModelAndPackage
 import chnu.coursework.car_dealership.repository.producingCountry.ProducingCountryRepository;
 import chnu.coursework.car_dealership.repository.vehicleType.VehicleTypeRepository;
 import chnu.coursework.car_dealership.service.automobile.interfaces.IAutomobileService;
+import chnu.coursework.car_dealership.service.automobileInOrder.impls.AutomobileInOrderServiceImpl;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Projections;
@@ -24,6 +26,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -66,6 +69,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
     ProducingCountryRepository producingCountryRepository;
 
     @Autowired
+    AutomobileInOrderServiceImpl automobileInOrderService;
+
+    @Autowired
     private MongoCollectionGetter mongoCollectionGetter;
 
     private ToObjectListConverter toObjectListConverter = new ToObjectListConverter();
@@ -74,10 +80,8 @@ public class AutomobileServiceImpl implements IAutomobileService {
 
     @PostConstruct
     void init() {
-
 //        fakeAutomobile.getAutomobiles().get(0).setVehicleType(vehicleTypeRepository.findAll().get(6));
 //        fakeAutomobile.getAutomobiles().get(0).setExportedFrom(producingCountryRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(0).setMake(makeRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setExteriorColor(exteriorColorRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(0).setInteriorColor(interiorColorRepository.findAll().get(5));
@@ -85,7 +89,6 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //
 //        fakeAutomobile.getAutomobiles().get(1).setVehicleType(vehicleTypeRepository.findAll().get(6));
 //        fakeAutomobile.getAutomobiles().get(1).setExportedFrom(producingCountryRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(1).setMake(makeRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(1).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(1).setExteriorColor(exteriorColorRepository.findAll().get(2));
 //        fakeAutomobile.getAutomobiles().get(1).setInteriorColor(interiorColorRepository.findAll().get(5));
@@ -93,7 +96,6 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //
 //        fakeAutomobile.getAutomobiles().get(2).setVehicleType(vehicleTypeRepository.findAll().get(6));
 //        fakeAutomobile.getAutomobiles().get(2).setExportedFrom(producingCountryRepository.findAll().get(0));
-//        fakeAutomobile.getAutomobiles().get(2).setMake(makeRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(2).setModelAndPackage(modelAndPackageRepository.findAll().get(0));
 //        fakeAutomobile.getAutomobiles().get(2).setExteriorColor(exteriorColorRepository.findAll().get(3));
 //        fakeAutomobile.getAutomobiles().get(2).setInteriorColor(interiorColorRepository.findAll().get(5));
@@ -101,7 +103,6 @@ public class AutomobileServiceImpl implements IAutomobileService {
 //
 //        fakeAutomobile.getAutomobiles().get(3).setVehicleType(vehicleTypeRepository.findAll().get(2));
 //        fakeAutomobile.getAutomobiles().get(3).setExportedFrom(producingCountryRepository.findAll().get(1));
-//        fakeAutomobile.getAutomobiles().get(3).setMake(makeRepository.findAll().get(2));
 //        fakeAutomobile.getAutomobiles().get(3).setModelAndPackage(modelAndPackageRepository.findAll().get(1));
 //        fakeAutomobile.getAutomobiles().get(3).setExteriorColor(exteriorColorRepository.findAll().get(4));
 //        fakeAutomobile.getAutomobiles().get(3).setInteriorColor(interiorColorRepository.findAll().get(5));
@@ -119,6 +120,11 @@ public class AutomobileServiceImpl implements IAutomobileService {
     @Override
     public Automobile update(Automobile automobile) {
         automobile.setModified_at(LocalDateTime.now());
+
+        if (automobile.getAvailability().equals(AutomobileAvailability.ORDERED.toString())) {
+            updateInOrderWhenAutomobileIsUpdated(automobile);
+        }
+
         return repository.save(automobile);
 //        return dao.update(automobile);
     }
@@ -146,7 +152,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
         Bson project = Aggregates.project(Projections.fields(
                 Projections.excludeId(),
                 Projections.include("make", "price", "numberOfSeats")
-        ));
+                                                            ));
 
         Bson match = Aggregates.match(eq("numberOfSeats", 7));
 
@@ -155,7 +161,7 @@ public class AutomobileServiceImpl implements IAutomobileService {
                 Accumulators.min("minPrice", "$price"),
                 Accumulators.max("maxPrice", "$price"),
                 Accumulators.avg("avgPrice", "$price")
-        );
+                                     );
 
         return toObjectListConverter.convert(
                 mongoCollectionGetter.getCollection(collection).aggregate(
@@ -163,9 +169,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
                                 project,
                                 match,
                                 group
-                        )
-                )
-        ).get(0);
+                                     )
+                                                                         )
+                                            ).get(0);
     }
 
     public List<Object> getVolkswagenGearboxMin1600CubicCapacity() {
@@ -173,16 +179,28 @@ public class AutomobileServiceImpl implements IAutomobileService {
                 eq("make.name", "Volkswagen"),
                 eq("engine.transmissionType", "Механіка"),
                 gt("engine.cubicCapacity", 1600)
-        ));
+                                         ));
 
         return toObjectListConverter.convert(
                 mongoCollectionGetter.getCollection(collection).aggregate(
                         Arrays.asList(match)
-                )
-        );
+                                                                         ));
+    }
+
+    public List<Automobile> getAllByDealershipCity(String city) {
+        return repository.findAllByDealershipCity(city);
     }
 
 
-
+    private void updateInOrderWhenAutomobileIsUpdated(Automobile automobile) {
+        automobileInOrderService.getAll()
+                                .stream()
+                                .filter(item -> item.getAutomobile().equals(automobile))
+                                .collect(Collectors.toList())
+                                .forEach(item -> {
+                                    item.setAutomobile(automobile);
+                                    automobileInOrderService.update(item);
+                                });
+    }
 
 }

@@ -1,8 +1,8 @@
 package chnu.coursework.car_dealership.service.automobileInOrder.impls;
 
-import chnu.coursework.car_dealership.data.FakeAutomobile;
 import chnu.coursework.car_dealership.data.FakeAutomobileInOrder;
 import chnu.coursework.car_dealership.model.AutomobileInOrder;
+import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository;
 import chnu.coursework.car_dealership.repository.automobileInOrder.AutomobileInOrderRepository;
 import chnu.coursework.car_dealership.service.automobileInOrder.interfaces.IAutomobileInOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class AutomobileInOrderServiceImpl implements IAutomobileInOrderService {
     FakeAutomobileInOrder fakeAutomobileInOrder;
 
     @Autowired
-    FakeAutomobile fakeAutomobile;
+    AutomobileRepository automobileRepository;
 
     @PostConstruct
     void init(){
 //        fakeAutomobileInOrder.getAutomobileInOrders()
 //                             .get(0)
-//                             .setAutomobile(fakeAutomobile.getAutomobiles().get(3));
+//                             .setAutomobile(automobileRepository.findAll().get(3));
 //        repository.saveAll(fakeAutomobileInOrder.getAutomobileInOrders());
     }
 

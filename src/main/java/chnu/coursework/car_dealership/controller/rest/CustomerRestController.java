@@ -72,6 +72,7 @@ public class CustomerRestController {
                                        Customer customer) {
         customer.setId(UUID.randomUUID().toString());
         customer.setCreated_at(LocalDateTime.now());
+        customer.setModified_at(LocalDateTime.now());
         return service.create(customer);
     }
 
@@ -86,6 +87,7 @@ public class CustomerRestController {
                            @RequestBody
                            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого покупця")
                                    Customer customer) {
+        customer.setId(service.getById(id).getId());
         customer.setCreated_at(service.getById(id).getCreated_at());
         return service.update(customer);
     }

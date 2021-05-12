@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface MakeRepository extends MongoRepository<Make, String> {
     public List<Make> findDistinctByNameIsNot(String name);
+    public Make findMakeByName(String name);
 }

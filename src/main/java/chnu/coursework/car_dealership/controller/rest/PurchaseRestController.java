@@ -71,6 +71,7 @@ public class PurchaseRestController {
                                         Purchase purchase){
         purchase.setId(UUID.randomUUID().toString());
         purchase.setCreated_at(LocalDateTime.now());
+        purchase.setModified_at(LocalDateTime.now());
         return service.create(purchase);
     }
 
@@ -85,6 +86,7 @@ public class PurchaseRestController {
                                 @RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої продажі")
                                         Purchase purchase){
+        purchase.setId(service.getById(id).getId());
         purchase.setCreated_at(service.getById(id).getCreated_at());
         return service.update(purchase);
     }

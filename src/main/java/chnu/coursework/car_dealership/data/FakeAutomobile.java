@@ -27,7 +27,6 @@ public class FakeAutomobile {
                             .id(UUID.randomUUID().toString())
                             .vehicleType(null)
                             .exportedFrom(null)
-                            .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
                             .engine(new Engine(FuelType.DIESEL.toString(),
@@ -94,7 +93,6 @@ public class FakeAutomobile {
                             .id(UUID.randomUUID().toString())
                             .vehicleType(null)
                             .exportedFrom(null)
-                            .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
                             .engine(new Engine(FuelType.DIESEL.toString(),
@@ -160,7 +158,6 @@ public class FakeAutomobile {
                             .id(UUID.randomUUID().toString())
                             .vehicleType(null)
                             .exportedFrom(null)
-                            .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
                             .engine(new Engine(FuelType.DIESEL.toString(),
@@ -214,7 +211,6 @@ public class FakeAutomobile {
                             .id(UUID.randomUUID().toString())
                             .vehicleType(null)
                             .exportedFrom(null)
-                            .make(null)
                             .modelAndPackage(null)
                             .drive(Drive.FRONT_WHEEL_DRIVE.toString())
                             .engine(new Engine(FuelType.DIESEL.toString(),

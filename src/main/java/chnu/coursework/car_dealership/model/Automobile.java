@@ -21,17 +21,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document
 public class Automobile {
     @Schema(description = "ID автомобіля", accessMode = Schema.AccessMode.READ_ONLY)
     @Id
+    @EqualsAndHashCode.Include()
     private String id;
     @Schema(description = "Тип кузова")
     private VehicleType vehicleType;
     @Schema(description = "Країна виробник")
     private ProducingCountry exportedFrom;
-    @Schema(description = "Марка")
-    private Make make;
     @Schema(description = "Модель")
     private ModelAndPackage modelAndPackage;
     @Schema(description = "Привід")

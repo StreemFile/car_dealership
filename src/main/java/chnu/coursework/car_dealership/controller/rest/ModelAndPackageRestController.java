@@ -1,6 +1,7 @@
 package chnu.coursework.car_dealership.controller.rest;
 
 import chnu.coursework.car_dealership.model.ModelAndPackage;
+import chnu.coursework.car_dealership.service.make.impls.MakeServiceImpl;
 import chnu.coursework.car_dealership.service.modelAndPackage.impls.ModelAndPackageServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,6 +29,9 @@ import java.util.UUID;
 public class ModelAndPackageRestController {
     @Autowired
     ModelAndPackageServiceImpl service;
+
+    @Autowired
+    MakeServiceImpl makeService;
 
 
     @Operation(
@@ -71,6 +75,7 @@ public class ModelAndPackageRestController {
                                         ModelAndPackage modelAndPackage){
         modelAndPackage.setId(UUID.randomUUID().toString());
         modelAndPackage.setCreated_at(LocalDateTime.now());
+        modelAndPackage.setModified_at(LocalDateTime.now());
         return service.create(modelAndPackage);
     }
 
@@ -85,6 +90,7 @@ public class ModelAndPackageRestController {
                                 @RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої моделі")
                                         ModelAndPackage modelAndPackage){
+        modelAndPackage.setId(service.getById(id).getId());
         modelAndPackage.setCreated_at(service.getById(id).getCreated_at());
         return service.update(modelAndPackage);
     }

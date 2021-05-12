@@ -2,6 +2,7 @@ package chnu.coursework.car_dealership.service.modelAndPackage.impls;
 
 import chnu.coursework.car_dealership.data.FakeModelAndPackage;
 import chnu.coursework.car_dealership.model.ModelAndPackage;
+import chnu.coursework.car_dealership.repository.make.MakeRepository;
 import chnu.coursework.car_dealership.repository.modelAndPackage.ModelAndPackageRepository;
 import chnu.coursework.car_dealership.service.modelAndPackage.interfaces.IModelAndPackageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,14 @@ public class ModelAndPackageServiceImpl implements IModelAndPackageService {
     @Autowired
     FakeModelAndPackage fakeModelAndPackage;
 
+    @Autowired
+    MakeRepository makeRepository;
+
     @PostConstruct
     void init(){
+//        fakeModelAndPackage.getModelAndPackages().get(0).setMake(makeRepository.findAll().get(0));
+//        fakeModelAndPackage.getModelAndPackages().get(1).setMake(makeRepository.findAll().get(2));
+//        fakeModelAndPackage.getModelAndPackages().get(2).setMake(makeRepository.findAll().get(1));
 //        repository.saveAll(fakeModelAndPackage.getModelAndPackages());
     }
 

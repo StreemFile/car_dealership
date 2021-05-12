@@ -67,6 +67,7 @@ public class InteriorColorRestController {
                                         InteriorColor interiorColor){
         interiorColor.setId(UUID.randomUUID().toString());
         interiorColor.setCreated_at(LocalDateTime.now());
+        interiorColor.setModified_at(LocalDateTime.now());
         return service.create(interiorColor);
     }
 
@@ -81,6 +82,7 @@ public class InteriorColorRestController {
                                 @RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованого кольору")
                                         InteriorColor interiorColor){
+        interiorColor.setId(service.getById(id).getId());
         interiorColor.setCreated_at(service.getById(id).getCreated_at());
         return service.update(interiorColor);
     }

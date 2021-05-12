@@ -68,6 +68,7 @@ public class CompanyRestController {
                                       Company company) {
         company.setId(UUID.randomUUID().toString());
         company.setCreated_at(LocalDateTime.now());
+        company.setModified_at(LocalDateTime.now());
         return service.create(company);
     }
 
@@ -82,6 +83,7 @@ public class CompanyRestController {
                           @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані зміненої компанії")
                           @RequestBody
                                   Company company) {
+        company.setId(service.getById(id).getId());
         company.setCreated_at(service.getById(id).getCreated_at());
         return service.update(company);
     }

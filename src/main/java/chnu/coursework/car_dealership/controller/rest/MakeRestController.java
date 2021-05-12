@@ -71,10 +71,16 @@ public class MakeRestController {
                            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової марки")
 
                                    Make make){
-        make.setId(UUID.randomUUID().toString());
-        make.setCreated_at(LocalDateTime.now());
-        return service.create(make);
+        if(getMakeByName(make.getName()) != null) {
+            return getMakeByName(make.getName());
+        } else {
+            make.setId(UUID.randomUUID().toString());
+            make.setCreated_at(LocalDateTime.now());
+            make.setModified_at(LocalDateTime.now());
+            return service.create(make);
+        }
     }
+
 
     @Operation(
             summary = "Редагування марки",
@@ -88,8 +94,14 @@ public class MakeRestController {
                        @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої марки")
 
                                Make make){
+        make.setId(service.getById(id).getId());
         make.setCreated_at(service.getById(id).getCreated_at());
         return service.update(make);
+    }
+
+    @GetMapping("/getByName/{name}")
+    public Make getMakeByName(@PathVariable String name){
+        return service.getMakeByName(name);
     }
 
 //    @GetMapping("/get/except/{make}")
