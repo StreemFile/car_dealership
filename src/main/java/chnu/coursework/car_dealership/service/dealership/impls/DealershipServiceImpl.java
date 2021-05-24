@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -57,6 +58,11 @@ public class DealershipServiceImpl implements IDealershipService {
 
     @Override
     public Dealership create(Dealership dealership) {
+        if(dealership.getId() == null) {
+            dealership.setId(UUID.randomUUID().toString());
+            dealership.setCreated_at(LocalDateTime.now());
+            dealership.setModified_at(LocalDateTime.now());
+        }
         return repository.save(dealership);
 //        return dao.create(dealership);
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,6 +37,11 @@ public class ExteriorColorServiceImpl implements IExteriorColorService {
 
     @Override
     public ExteriorColor create(ExteriorColor exteriorColor) {
+        if(exteriorColor.getId() == null) {
+            exteriorColor.setId(UUID.randomUUID().toString());
+            exteriorColor.setCreated_at(LocalDateTime.now());
+            exteriorColor.setModified_at(LocalDateTime.now());
+        }
         return repository.save(exteriorColor);
 //        return dao.create(exteriorColor);
     }

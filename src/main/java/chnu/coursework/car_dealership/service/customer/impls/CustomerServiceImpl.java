@@ -5,12 +5,15 @@ import chnu.coursework.car_dealership.data.FakeCustomer;
 import chnu.coursework.car_dealership.model.Customer;
 import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
 import chnu.coursework.car_dealership.service.customer.interfaces.ICustomerService;
+import chnu.coursework.car_dealership.service.purchase.impls.PurchaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +35,9 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     FakeCustomer fakeCustomer;
 
+    @Autowired
+    PurchaseServiceImpl purchaseService;
+
     @PostConstruct
     void init(){
 //        repository.saveAll(fakeCustomer.getCustomers());
@@ -39,6 +45,11 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Customer create(Customer customer) {
+        if(customer.getId() == null) {
+            customer.setId(UUID.randomUUID().toString());
+            customer.setCreated_at(LocalDateTime.now());
+            customer.setModified_at(LocalDateTime.now());
+        }
         return repository.save(customer);
 //        return dao.create(customer);
     }
@@ -46,6 +57,7 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Customer update(Customer customer) {
         customer.setModified_at(LocalDateTime.now());
+        updatePurchaseWhenCustomerIsUpdated(customer);
         return repository.save(customer);
 //        return dao.update(customer);
     }
@@ -80,5 +92,15 @@ public class CustomerServiceImpl implements ICustomerService {
         return repository.findDistinctByPlaceOfResidenceIsNot(placeOfResidence);
     }
 
+    private void updatePurchaseWhenCustomerIsUpdated(Customer customer){
+        purchaseService.getAll()
+                       .stream()
+                       .filter(item -> item.getCustomer().equals(customer))
+                       .collect(Collectors.toList())
+                       .forEach(item -> {
+                           item.setCustomer(customer);
+                           purchaseService.update(item);
+                       });
+    }
 //    public List<Customer>
 }

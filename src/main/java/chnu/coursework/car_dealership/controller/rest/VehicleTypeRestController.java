@@ -8,9 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,9 +67,6 @@ public class VehicleTypeRestController {
     public VehicleType create(@RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нового кузову")
                                         VehicleType vehicleType){
-        vehicleType.setId(UUID.randomUUID().toString());
-        vehicleType.setCreated_at(LocalDateTime.now());
-        vehicleType.setModified_at(LocalDateTime.now());
         return service.create(vehicleType);
     }
 

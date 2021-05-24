@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,6 +43,11 @@ public class AutomobileInOrderServiceImpl implements IAutomobileInOrderService {
 
     @Override
     public AutomobileInOrder create(AutomobileInOrder automobileInOrder) {
+        if(automobileInOrder.getId() == null) {
+            automobileInOrder.setId(UUID.randomUUID().toString());
+            automobileInOrder.setCreated_at(LocalDateTime.now());
+            automobileInOrder.setModified_at(LocalDateTime.now());
+        }
         return repository.save(automobileInOrder);
     }
 
@@ -65,5 +71,13 @@ public class AutomobileInOrderServiceImpl implements IAutomobileInOrderService {
     @Override
     public List<AutomobileInOrder> getAll() {
         return repository.findAll();
+    }
+
+    public AutomobileInOrder getByAutomobileId(String id) {
+        return repository.findByAutomobileId(id);
+    }
+
+    public AutomobileInOrder deleteByAutomobileId(String id) {
+        return repository.deleteByAutomobileId(id);
     }
 }

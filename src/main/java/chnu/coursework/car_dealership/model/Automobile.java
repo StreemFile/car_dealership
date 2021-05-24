@@ -30,7 +30,7 @@ public class Automobile {
     private String id;
     @Schema(description = "Тип кузова")
     private VehicleType vehicleType;
-    @Schema(description = "Країна виробник")
+    @Schema(description = "Країна пригнання")
     private ProducingCountry exportedFrom;
     @Schema(description = "Модель")
     private ModelAndPackage modelAndPackage;

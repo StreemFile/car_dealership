@@ -7,6 +7,7 @@ import chnu.coursework.car_dealership.model.Employee;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
 import chnu.coursework.car_dealership.repository.employee.EmployeeRepository;
 import chnu.coursework.car_dealership.service.employee.interfaces.IEmployeeService;
+import chnu.coursework.car_dealership.service.purchase.impls.PurchaseServiceImpl;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Projections;
@@ -20,6 +21,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -46,6 +49,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
     private  MongoCollectionGetter mongoCollectionGetter;
+
+    @Autowired
+    PurchaseServiceImpl purchaseService;
+
 
     private  ToObjectListConverter toObjectListConverter = new ToObjectListConverter();
 
@@ -74,6 +81,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public Employee create(Employee employee) {
+        if(employee.getId() == null) {
+            employee.setId(UUID.randomUUID().toString());
+            employee.setCreated_at(LocalDateTime.now());
+            employee.setModified_at(LocalDateTime.now());
+        }
         return repository.save(employee);
 //        return dao.create(employee);
     }
@@ -81,6 +93,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public Employee update(Employee employee) {
         employee.setModified_at(LocalDateTime.now());
+        updatePurchaseWhenEmployeeIsUpdated(employee);
         return repository.save(employee);
 //        return dao.update(employee);
     }
@@ -245,7 +258,15 @@ public class EmployeeServiceImpl implements IEmployeeService {
         stringSalaries.forEach(item -> intSalaries.add(Integer.valueOf(item)));
         return repository.findDistinctBySalaryIn(intSalaries);
     }
-
-
+    private void updatePurchaseWhenEmployeeIsUpdated(Employee employee){
+        purchaseService.getAll()
+                       .stream()
+                       .filter(item -> item.getEmployee().equals(employee))
+                       .collect(Collectors.toList())
+                       .forEach(item -> {
+                           item.setEmployee(employee);
+                           purchaseService.update(item);
+                       });
+    }
 
 }

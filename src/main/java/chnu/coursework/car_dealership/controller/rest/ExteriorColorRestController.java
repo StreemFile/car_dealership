@@ -69,9 +69,6 @@ public class ExteriorColorRestController {
     public ExteriorColor create(@RequestBody
                              @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нового кольору")
                                      ExteriorColor exteriorColor){
-        exteriorColor.setId(UUID.randomUUID().toString());
-        exteriorColor.setCreated_at(LocalDateTime.now());
-        exteriorColor.setModified_at(LocalDateTime.now());
         return service.create(exteriorColor);
     }
 

@@ -8,9 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -70,9 +68,6 @@ public class CustomerRestController {
     public Customer create(@RequestBody
                                @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нового покупця")
                                        Customer customer) {
-        customer.setId(UUID.randomUUID().toString());
-        customer.setCreated_at(LocalDateTime.now());
-        customer.setModified_at(LocalDateTime.now());
         return service.create(customer);
     }
 

@@ -8,10 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -71,9 +69,6 @@ public class DealershipRestController {
     public Dealership create(@RequestBody
                           @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нового автосалону")
                                   Dealership dealership) {
-        dealership.setId(UUID.randomUUID().toString());
-        dealership.setCreated_at(LocalDateTime.now());
-        dealership.setModified_at(LocalDateTime.now());
         return service.create(dealership);
     }
 

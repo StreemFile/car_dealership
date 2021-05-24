@@ -4,8 +4,8 @@ public enum FuelType {
     PETROL("Бензин"),
     DIESEL("Дизель"),
     ELECTRIC("Електроенергія"),
-    HYBRID_PETROL_ELECTRIC("Гібрид (бензин-електрроенергія)"),
-    HYBRID_DIESEL_ELECTRIC("Гібрид (дизель-електрроенергія)"),
+    HYBRID_PETROL_ELECTRIC("Гібрид (бензин-електроенергія)"),
+    HYBRID_DIESEL_ELECTRIC("Гібрид (дизель-електроенергія)"),
     HYBRID_PETROL_GAS("Гібрид (газ-бензин)");
 
     private String toString;

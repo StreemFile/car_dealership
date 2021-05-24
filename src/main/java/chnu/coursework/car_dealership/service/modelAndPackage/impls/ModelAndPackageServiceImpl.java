@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,6 +43,11 @@ public class ModelAndPackageServiceImpl implements IModelAndPackageService {
 
     @Override
     public ModelAndPackage create(ModelAndPackage modelAndPackage) {
+        if(modelAndPackage.getId() == null) {
+            modelAndPackage.setId(UUID.randomUUID().toString());
+            modelAndPackage.setCreated_at(LocalDateTime.now());
+            modelAndPackage.setModified_at(LocalDateTime.now());
+        }
         return repository.save(modelAndPackage);
 //        return dao.create(modelAndPackage);
     }

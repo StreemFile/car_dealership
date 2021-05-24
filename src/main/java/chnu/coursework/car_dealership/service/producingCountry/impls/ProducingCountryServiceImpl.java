@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,6 +36,11 @@ public class ProducingCountryServiceImpl implements IProducingCountryService {
 
     @Override
     public ProducingCountry create(ProducingCountry producingCountry) {
+        if(producingCountry.getId() == null) {
+            producingCountry.setId(UUID.randomUUID().toString());
+            producingCountry.setCreated_at(LocalDateTime.now());
+            producingCountry.setModified_at(LocalDateTime.now());
+        }
         return repository.save(producingCountry);
 //        return dao.create(producingCountry);
     }

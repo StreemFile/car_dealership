@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,6 +37,11 @@ public class VehicleTypeServiceImpl implements IVehicleTypeService {
 
     @Override
     public VehicleType create(VehicleType vehicleType) {
+        if(vehicleType.getId() == null) {
+            vehicleType.setId(UUID.randomUUID().toString());
+            vehicleType.setCreated_at(LocalDateTime.now());
+            vehicleType.setModified_at(LocalDateTime.now());
+        }
         return repository.save(vehicleType);
 //        return dao.create(vehicleType);
     }

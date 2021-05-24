@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -46,6 +47,11 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public Company create(Company company) {
+        if(company.getId() == null) {
+            company.setId(UUID.randomUUID().toString());
+            company.setCreated_at(LocalDateTime.now());
+            company.setModified_at(LocalDateTime.now());
+        }
         return repository.save(company);
 //        return dao.create(company);
     }

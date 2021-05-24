@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,12 +30,17 @@ public class InteriorColorServiceImpl implements IInteriorColorService {
     FakeInteriorColor fakeInteriorColor;
 
     @PostConstruct
-    void init(){
+    void init() {
 //        repository.saveAll(fakeInteriorColor.getInteriorColors());
     }
 
     @Override
     public InteriorColor create(InteriorColor interiorColor) {
+        if (interiorColor.getId() == null) {
+            interiorColor.setId(UUID.randomUUID().toString());
+            interiorColor.setCreated_at(LocalDateTime.now());
+            interiorColor.setModified_at(LocalDateTime.now());
+        }
         return repository.save(interiorColor);
 //        return dao.create(interiorColor);
     }

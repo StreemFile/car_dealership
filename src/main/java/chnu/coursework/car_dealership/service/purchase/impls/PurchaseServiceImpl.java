@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,6 +51,11 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
     @Override
     public Purchase create(Purchase purchase) {
+        if(purchase.getId() == null) {
+            purchase.setId(UUID.randomUUID().toString());
+            purchase.setCreated_at(LocalDateTime.now());
+            purchase.setModified_at(LocalDateTime.now());
+        }
         return repository.save(purchase);
 //        return dao.create(purchase);
     }

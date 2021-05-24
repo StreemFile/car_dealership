@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AutomobileInOrderRepository extends MongoRepository<AutomobileInOrder,String> {
+   AutomobileInOrder findByAutomobileId(String id);
+   AutomobileInOrder deleteByAutomobileId(String id);
 }

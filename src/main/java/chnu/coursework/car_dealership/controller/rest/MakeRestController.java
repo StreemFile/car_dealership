@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 
 @Tag(name = "Make",
-        description = "Відповідає за керування даними колекції Make")
+     description = "Відповідає за керування даними колекції Make")
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/makes")
@@ -30,13 +30,14 @@ public class MakeRestController {
 
     @Autowired
     MakeServiceImpl service;
+
     @Operation(
             summary = "Вивід марок",
             description = "Виводить всю інформацію про всі коли-небудь" +
-                    " продаваємі марки"
+                          " продаваємі марки"
     )
     @GetMapping
-    public List<Make> getAll(){
+    public List<Make> getAll() {
         return service.getAll();
     }
 
@@ -45,9 +46,10 @@ public class MakeRestController {
             description = "Виводить всю інформацію про шукану марку"
     )
     @GetMapping("/get/{id}")
-    public Make getById(@PathVariable("id")
-                            @Parameter(description = "ID марки")
-                                    String id){
+    public Make getById(
+            @PathVariable("id")
+            @Parameter(description = "ID марки")
+                    String id) {
         return service.getById(id);
     }
 
@@ -56,9 +58,10 @@ public class MakeRestController {
             description = "Видаляє задану марку"
     )
     @GetMapping("/delete/{id}")
-    public Make delete(@PathVariable("id")
-                           @Parameter(description = "ID марки")
-                                   String id){
+    public Make delete(
+            @PathVariable("id")
+            @Parameter(description = "ID марки")
+                    String id) {
         return service.delete(service.getById(id));
     }
 
@@ -67,18 +70,20 @@ public class MakeRestController {
             description = "Створює нову марку"
     )
     @PostMapping("/create")
-    public Make create(@RequestBody
-                           @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової марки")
+    public Make create(
+            @RequestBody
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової марки")
 
-                                   Make make){
-        if(getMakeByName(make.getName()) != null) {
+                    Make make) {
+        if (getMakeByName(make.getName()) != null) {
             return getMakeByName(make.getName());
-        } else {
+        }
+        if (make.getId() == null) {
             make.setId(UUID.randomUUID().toString());
             make.setCreated_at(LocalDateTime.now());
             make.setModified_at(LocalDateTime.now());
-            return service.create(make);
         }
+        return service.create(make);
     }
 
 
@@ -87,20 +92,23 @@ public class MakeRestController {
             description = "Шукає марку по id та надає їй оновлену інформацію"
     )
     @PostMapping("/edit/{id}")
-    public Make update(@PathVariable
-                           @Parameter(description = "ID марки")
-                                   String id,
-                       @RequestBody
-                       @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої марки")
+    public Make update(
+            @PathVariable
+            @Parameter(description = "ID марки")
+                    String id,
+            @RequestBody
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані відредагованої марки")
 
-                               Make make){
+                    Make make) {
         make.setId(service.getById(id).getId());
         make.setCreated_at(service.getById(id).getCreated_at());
         return service.update(make);
     }
 
     @GetMapping("/getByName/{name}")
-    public Make getMakeByName(@PathVariable String name){
+    public Make getMakeByName(
+            @PathVariable
+                    String name) {
         return service.getMakeByName(name);
     }
 

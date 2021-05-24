@@ -66,9 +66,6 @@ public class CompanyRestController {
     public Company create(@RequestBody
                               @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової компанії")
                                       Company company) {
-        company.setId(UUID.randomUUID().toString());
-        company.setCreated_at(LocalDateTime.now());
-        company.setModified_at(LocalDateTime.now());
         return service.create(company);
     }
 

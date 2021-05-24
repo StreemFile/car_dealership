@@ -69,9 +69,6 @@ public class ProducingCountryRestController {
     public ProducingCountry create(@RequestBody
                                 @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Дані нової країни")
                                         ProducingCountry producingCountry){
-        producingCountry.setId(UUID.randomUUID().toString());
-        producingCountry.setCreated_at(LocalDateTime.now());
-        producingCountry.setModified_at(LocalDateTime.now());
         return service.create(producingCountry);
     }
 

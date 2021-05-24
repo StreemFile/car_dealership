@@ -15,6 +15,7 @@ import chnu.coursework.car_dealership.repository.producingCountry.ProducingCount
 import chnu.coursework.car_dealership.repository.vehicleType.VehicleTypeRepository;
 import chnu.coursework.car_dealership.service.automobile.interfaces.IAutomobileService;
 import chnu.coursework.car_dealership.service.automobileInOrder.impls.AutomobileInOrderServiceImpl;
+import chnu.coursework.car_dealership.service.purchase.impls.PurchaseServiceImpl;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Projections;
@@ -26,6 +27,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.mongodb.client.model.Filters.*;
@@ -72,6 +74,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
     AutomobileInOrderServiceImpl automobileInOrderService;
 
     @Autowired
+    PurchaseServiceImpl purchaseService;
+
+    @Autowired
     private MongoCollectionGetter mongoCollectionGetter;
 
     private ToObjectListConverter toObjectListConverter = new ToObjectListConverter();
@@ -113,6 +118,11 @@ public class AutomobileServiceImpl implements IAutomobileService {
 
     @Override
     public Automobile create(Automobile automobile) {
+        if(automobile.getId() == null) {
+            automobile.setId(UUID.randomUUID().toString());
+            automobile.setCreated_at(LocalDateTime.now());
+            automobile.setModified_at(LocalDateTime.now());
+        }
         return repository.save(automobile);
 //        return dao.create(automobile);
     }
@@ -124,7 +134,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
         if (automobile.getAvailability().equals(AutomobileAvailability.ORDERED.toString())) {
             updateInOrderWhenAutomobileIsUpdated(automobile);
         }
-
+        if (automobile.getAvailability().equals(AutomobileAvailability.SOLD.toString())) {
+            updatePurchaseWhenSoldAutomobileIsUpdated(automobile);
+        }
         return repository.save(automobile);
 //        return dao.update(automobile);
     }
@@ -203,4 +215,14 @@ public class AutomobileServiceImpl implements IAutomobileService {
                                 });
     }
 
+    private void updatePurchaseWhenSoldAutomobileIsUpdated(Automobile automobile){
+        purchaseService.getAll()
+                       .stream()
+                       .filter(item -> item.getAutomobile().equals(automobile))
+                       .collect(Collectors.toList())
+                       .forEach(item -> {
+                           item.setAutomobile(automobile);
+                           purchaseService.update(item);
+                       });
+    }
 }
