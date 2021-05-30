@@ -134,9 +134,9 @@ public class AutomobileServiceImpl implements IAutomobileService {
         if (automobile.getAvailability().equals(AutomobileAvailability.ORDERED.toString())) {
             updateInOrderWhenAutomobileIsUpdated(automobile);
         }
-        if (automobile.getAvailability().equals(AutomobileAvailability.SOLD.toString())) {
-            updatePurchaseWhenSoldAutomobileIsUpdated(automobile);
-        }
+//        if (automobile.getAvailability().equals(AutomobileAvailability.SOLD.toString())) {
+//            updatePurchaseWhenSoldAutomobileIsUpdated(automobile);
+//        }
         return repository.save(automobile);
 //        return dao.update(automobile);
     }

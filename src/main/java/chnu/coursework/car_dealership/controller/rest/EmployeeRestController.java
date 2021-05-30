@@ -127,11 +127,11 @@ public class EmployeeRestController {
 //        return service.getHighestTotalSalary();
 //    }
 //
-//    @GetMapping("/get/salary/between/10000and14000")
-//    public List<Object> getEmployeesWithSalaryBetween10000And14000(){
-//        return service.getEmployeesWithSalaryBetween10000And14000();
-//    }
-//
+    @GetMapping("/get/salary/between/10000and14000")
+    public List<Object> getEmployeesWithSalaryBetween10000And14000(){
+        return service.getEmployeesWithSalaryBetween10000And14000();
+    }
+
 //    @GetMapping("/get/name/salary")
 //    public List<Object> getNameAndSalary(){
 //        return service.getNameAndSalary();

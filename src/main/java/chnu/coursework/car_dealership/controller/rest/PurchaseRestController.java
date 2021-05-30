@@ -1,6 +1,7 @@
 package chnu.coursework.car_dealership.controller.rest;
 
 import chnu.coursework.car_dealership.model.Purchase;
+import chnu.coursework.car_dealership.requestModel.SoldMake;
 import chnu.coursework.car_dealership.service.purchase.impls.PurchaseServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -84,5 +85,14 @@ public class PurchaseRestController {
         purchase.setId(service.getById(id).getId());
         purchase.setCreated_at(service.getById(id).getCreated_at());
         return service.update(purchase);
+    }
+
+    @GetMapping("/getByDates/after={after}_before={before}")
+    public Integer getIncomeBetweenDates(@PathVariable String before, @PathVariable String after){
+        return service.getIncomeBetweenDates(before, after);
+    }
+    @GetMapping("/countAndGroupMakes")
+    public List<SoldMake> groupAndCountSoldMakes() {
+        return service.groupAndCountSoldMakes();
     }
 }

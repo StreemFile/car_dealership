@@ -1,6 +1,7 @@
 package chnu.coursework.car_dealership.controller.rest;
 
 import chnu.coursework.car_dealership.model.Dealership;
+import chnu.coursework.car_dealership.requestModel.TotalSalary;
 import chnu.coursework.car_dealership.service.dealership.impls.DealershipServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -89,7 +89,7 @@ public class DealershipRestController {
     }
 
     @GetMapping("/totalSalaries")
-    public Map<String,Integer> getEachDealershipTotalSalary(){
+    public List<TotalSalary> getEachDealershipTotalSalary(){
         return service.getEachDealershipTotalSalary();
     }
 

@@ -3,6 +3,7 @@ package chnu.coursework.car_dealership.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ public class Purchase {
     @EqualsAndHashCode.Include()
     private String id;
     @Schema(description = "Проданий автомобіль")
+    @DBRef
     private Automobile automobile;
     @Schema(description = "Покупець")
     private Customer customer;

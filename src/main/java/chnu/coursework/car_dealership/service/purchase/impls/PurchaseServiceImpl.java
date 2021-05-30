@@ -6,14 +6,16 @@ import chnu.coursework.car_dealership.repository.automobile.AutomobileRepository
 import chnu.coursework.car_dealership.repository.customer.CustomerRepository;
 import chnu.coursework.car_dealership.repository.employee.EmployeeRepository;
 import chnu.coursework.car_dealership.repository.purchase.PurchaseRepository;
+import chnu.coursework.car_dealership.requestModel.SoldMake;
 import chnu.coursework.car_dealership.service.purchase.interfaces.IPurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,7 +44,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
     EmployeeRepository employeeRepository;
 
     @PostConstruct
-    void init(){
+    void init() {
 //        fakePurchase.getPurchases().get(0).setAutomobile(automobileRepository.findAll().get(2));
 //        fakePurchase.getPurchases().get(0).setCustomer(customerRepository.findAll().get(0));
 //        fakePurchase.getPurchases().get(0).setEmployee(employeeRepository.findAll().get(1));
@@ -51,7 +53,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
     @Override
     public Purchase create(Purchase purchase) {
-        if(purchase.getId() == null) {
+        if (purchase.getId() == null) {
             purchase.setId(UUID.randomUUID().toString());
             purchase.setCreated_at(LocalDateTime.now());
             purchase.setModified_at(LocalDateTime.now());
@@ -84,5 +86,45 @@ public class PurchaseServiceImpl implements IPurchaseService {
     public List<Purchase> getAll() {
         return repository.findAll();
 //        return dao.getAll();
+    }
+
+    public Integer getIncomeBetweenDates(String after, String before) {
+
+        return getPurchasesBetweenDates(after, before).stream()
+                                                      .mapToInt(Purchase::getSoldPrice)
+                                                      .sum() -
+               getPurchasesBetweenDates(after, before)
+                       .stream()
+                       .mapToInt(item -> item.getAutomobile().getActualPrice())
+                       .sum();
+    }
+
+    public List<SoldMake> groupAndCountSoldMakes() {
+        return repository.findAll()
+                         .stream()
+                         .collect(Collectors.groupingBy(
+                                 item -> item.getAutomobile().getModelAndPackage().getMake().getName(),
+                                 Collectors.counting()
+                                                       ))
+                         .entrySet()
+                         .stream()
+                         .sorted(Map.Entry.comparingByValue())
+                         .collect(Collectors.toMap(
+                                 Map.Entry::getKey,
+                                 Map.Entry::getValue,
+                                 (u, v) -> {
+                                     throw new IllegalStateException(
+                                             String.format("Duplicate key %s", u));
+                                 },
+                                 LinkedHashMap::new))
+                         .entrySet()
+                         .stream()
+                         .map(item -> new SoldMake(item.getKey(), item.getValue()))
+                         .collect(Collectors.toList());
+    }
+
+    private List<Purchase> getPurchasesBetweenDates(String after, String before) {
+        return repository.findByPurchaseDateIsBetween(LocalDate.parse(before).minusDays(1),
+                                                      LocalDate.parse(after).plusDays(1));
     }
 }

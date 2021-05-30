@@ -6,6 +6,7 @@ import chnu.coursework.car_dealership.model.Dealership;
 import chnu.coursework.car_dealership.model.Employee;
 import chnu.coursework.car_dealership.repository.company.CompanyRepository;
 import chnu.coursework.car_dealership.repository.dealership.DealershipRepository;
+import chnu.coursework.car_dealership.requestModel.TotalSalary;
 import chnu.coursework.car_dealership.service.automobile.impls.AutomobileServiceImpl;
 import chnu.coursework.car_dealership.service.dealership.interfaces.IDealershipService;
 import chnu.coursework.car_dealership.service.employee.impls.EmployeeServiceImpl;
@@ -58,7 +59,7 @@ public class DealershipServiceImpl implements IDealershipService {
 
     @Override
     public Dealership create(Dealership dealership) {
-        if(dealership.getId() == null) {
+        if (dealership.getId() == null) {
             dealership.setId(UUID.randomUUID().toString());
             dealership.setCreated_at(LocalDateTime.now());
             dealership.setModified_at(LocalDateTime.now());
@@ -95,7 +96,7 @@ public class DealershipServiceImpl implements IDealershipService {
 //        return dao.getAll();
     }
 
-    public Map<String, Integer> getEachDealershipTotalSalary() {
+    public List<TotalSalary> getEachDealershipTotalSalary() {
         return employeeService.getAll()
                               .stream()
                               .collect(Collectors.groupingBy(
@@ -106,12 +107,16 @@ public class DealershipServiceImpl implements IDealershipService {
                               .stream()
                               .sorted(Map.Entry.comparingByValue())
                               .collect(Collectors.toMap(
-                                      item -> item.getKey(),
-                                      item -> item.getValue(),
+                                      Map.Entry::getKey,
+                                      Map.Entry::getValue,
                                       (u, v) -> {
-                                          throw new IllegalStateException(String.format("Duplicate key %s", u));
+                                          throw new IllegalStateException(
+                                                  String.format("Duplicate key %s", u));
                                       },
-                                      LinkedHashMap::new));
+                                      LinkedHashMap::new)).entrySet()
+                              .stream()
+                              .map(item -> new TotalSalary(item.getKey(), item.getValue()))
+                              .collect(Collectors.toList());
     }
 
     public String getIdByEnglishCityName(String city) {
